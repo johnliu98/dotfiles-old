@@ -147,26 +147,31 @@ static Key keys[] = {
 
   /* Floating windows */
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ SUPER,                       XK_j,      moveresize,     {.v = "0x 25y 0w 0h" } },
-	{ SUPER,                       XK_k,      moveresize,     {.v = "0x -25y 0w 0h" } },
-	{ SUPER,                       XK_l,      moveresize,     {.v = "25x 0y 0w 0h" } },
-	{ SUPER,                       XK_h,      moveresize,     {.v = "-25x 0y 0w 0h" } },
-	{ SUPER|ShiftMask,             XK_j,      moveresize,     {.v = "0x 0y 0w 25h" } },
-	{ SUPER|ShiftMask,             XK_k,      moveresize,     {.v = "0x 0y 0w -25h" } },
-	{ SUPER|ShiftMask,             XK_l,      moveresize,     {.v = "0x 0y 25w 0h" } },
-	{ SUPER|ShiftMask,             XK_h,      moveresize,     {.v = "0x 0y -25w 0h" } },
-	{ SUPER|ControlMask,           XK_k,      moveresizeedge, {.v = "t"} },
-	{ SUPER|ControlMask,           XK_j,      moveresizeedge, {.v = "b"} },
-	{ SUPER|ControlMask,           XK_h,      moveresizeedge, {.v = "l"} },
-	{ SUPER|ControlMask,           XK_l,      moveresizeedge, {.v = "r"} },
-	{ SUPER|ControlMask|ShiftMask, XK_k,      moveresizeedge, {.v = "T"} },
-	{ SUPER|ControlMask|ShiftMask, XK_j,      moveresizeedge, {.v = "B"} },
-	{ SUPER|ControlMask|ShiftMask, XK_h,      moveresizeedge, {.v = "L"} },
-	{ SUPER|ControlMask|ShiftMask, XK_l,      moveresizeedge, {.v = "R"} },
+	{ SUPER,                        XK_j,      moveresize,     {.v = "0x 25y 0w 0h" } },
+	{ SUPER,                        XK_k,      moveresize,     {.v = "0x -25y 0w 0h" } },
+	{ SUPER,                        XK_l,      moveresize,     {.v = "25x 0y 0w 0h" } },
+	{ SUPER,                        XK_h,      moveresize,     {.v = "-25x 0y 0w 0h" } },
+	{ SUPER|ShiftMask,              XK_j,      moveresize,     {.v = "0x 0y 0w 25h" } },
+	{ SUPER|ShiftMask,              XK_k,      moveresize,     {.v = "0x 0y 0w -25h" } },
+	{ SUPER|ShiftMask,              XK_l,      moveresize,     {.v = "0x 0y 25w 0h" } },
+	{ SUPER|ShiftMask,              XK_h,      moveresize,     {.v = "0x 0y -25w 0h" } },
+	{ SUPER|ControlMask,            XK_k,      moveresizeedge, {.v = "t"} },
+	{ SUPER|ControlMask,            XK_j,      moveresizeedge, {.v = "b"} },
+	{ SUPER|ControlMask,            XK_h,      moveresizeedge, {.v = "l"} },
+	{ SUPER|ControlMask,            XK_l,      moveresizeedge, {.v = "r"} },
+	{ SUPER|ControlMask|ShiftMask,  XK_k,      moveresizeedge, {.v = "T"} },
+	{ SUPER|ControlMask|ShiftMask,  XK_j,      moveresizeedge, {.v = "B"} },
+	{ SUPER|ControlMask|ShiftMask,  XK_h,      moveresizeedge, {.v = "L"} },
+	{ SUPER|ControlMask|ShiftMask,  XK_l,      moveresizeedge, {.v = "R"} },
 
   /* Brightness */
 	{ 0, XF86XK_MonBrightnessUp,	  spawn,		SHCMD("xbacklight -inc 5") },
-	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("xbacklight -dec 5") },
+	{ 0, XF86XK_MonBrightnessDown,  spawn,		SHCMD("xbacklight -dec 5") },
+
+  /* Audio */
+	{ 0, XF86XK_AudioMute,		      spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioRaiseVolume,	  spawn,		SHCMD("pamixer --allow-boost -i 5; kill -44 $(pidof dwmblocks)") },
+	{ 0, XF86XK_AudioLowerVolume,	  spawn,		SHCMD("pamixer --allow-boost -d 5; kill -44 $(pidof dwmblocks)") },
 
   /* Window gaps */
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },

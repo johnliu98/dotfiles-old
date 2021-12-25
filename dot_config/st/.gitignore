@@ -2,3 +2,5 @@
 *.rej
 *.orig
 st
+
+dot_gitignore
