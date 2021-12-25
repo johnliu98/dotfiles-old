@@ -1,5 +1,0 @@
-0000000000000000000000000000000000000000 8cebbf6b111b664aecf8a29039c483ae4db5afe7 john <john@magic.(none)> 1640204556 +0100	clone: from https://github.com/LunarVim/Neovim-from-scratch.git
-8cebbf6b111b664aecf8a29039c483ae4db5afe7 6260c377370a7fa9ab5d9bade00380b77d3367d4 john <john@magic.(none)> 1640204585 +0100	checkout: moving from master to 01-options
-6260c377370a7fa9ab5d9bade00380b77d3367d4 e1ac27496fccd2e0accb79c6ac2097865feff14b john <john@magic.(none)> 1640204658 +0100	checkout: moving from 01-options to 02-keymaps
-e1ac27496fccd2e0accb79c6ac2097865feff14b 4e038120bf179d7220638ad3e17bf4974ed50fff john <john@magic.(none)> 1640204936 +0100	checkout: moving from 02-keymaps to 03-plugins
-4e038120bf179d7220638ad3e17bf4974ed50fff 68de5d4fab1cd11d74829947a2809c1899280dea john <john@magic.(none)> 1640206489 +0100	checkout: moving from 03-plugins to 04-colorscheme
