@@ -24,10 +24,12 @@ alias df='df -h'
 alias free='free -h'
 
 # file maintenance 
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
 alias mkd='mkdir -pv'
+
+# safe commands
+# alias cp='cp -i'
+# alias mv='mv -i'
+# alias rm='rm -i'
 
 # --- Git Aliases ---
 
