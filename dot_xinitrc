@@ -5,4 +5,4 @@
 [[ -f ~/.xprofile ]] && . ~/.xprofile
 
 # Start dwm
-exec dwm
+ssh-agent dwm

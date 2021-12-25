@@ -8,6 +8,9 @@ xset r rate 300 50 &
 feh --bg-scale ~/Pictures/fogy-spain-valley.jpg &
 compton &
 
+export PATH="$HOME/.local/bin/statusbar":$PATH && # source scripts for dwmblocks
+dwmblocks &
+
 # add xdg path
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -15,16 +18,3 @@ export XGD_DATA_HOME=$HOME/.local/share
 
 # add path to zsh config
 export ZDOTDIR=$HOME/.config/zsh
-
-clock() {
-    date "+%a %d %b %Y $icon %H:%M"
-}
-
-battery() {
-    echo "$(cat /sys/class/power_supply/BAT0/capacity)%"
-}
-
-while true; do
-    xsetroot -name " $(battery) | $(clock)"
-    sleep 15s
-done &
