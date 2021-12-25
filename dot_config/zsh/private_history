@@ -1,0 +1,284 @@
+pwd
+cd .config/zsh
+ls
+git branch
+ls
+ll
+pwd
+nvim zsh-vim-mode
+nvim zsh-exports
+cd .config/zsh
+nvim zsh-prompt
+nvim zsh-exports
+paru -Syu fnm
+paru -Syu zoxide
+nvim .config/zsh/zsh-exports
+nvim .config/zsh/.zshrc
+cd .config/zsh
+cd ~/svea_starter
+ls
+cd
+sudo reboot
+cd svea_starter
+cd .config/dwm
+patch < patches/dwm-hide_vacant_tags-6.1.diff
+nvim dwm.c
+ls
+nvim dwm.c
+cd .config/dwm
+rm config.h
+sudo make install
+nvim dwm.c
+sudo make install
+cd .config/dwm
+nvim dwm.c
+ls
+ls | grep rej
+sudo make install
+nvim dwm.c
+sudo make install
+cd .config/dwm
+nvim dwm.c
+sudo make install
+nvim dwm.c
+sudo make install
+cd
+cd .config/dwm
+ls
+rm dwm.c.rej
+gs
+nvim config.def.h.orig
+rm *.orig
+ls
+sudo make install
+cd .config/dwm
+nvim config.def.h
+patch < patches/dwm-bar-height-6.2.diff
+nvim config.def.h
+rm config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm config.h
+sudo make install
+cd .config/dwm
+patch -R < patches/dwm-bar-height-6.2.diff
+rm patches/dwm-bar-height-6.2.diff
+rm config.h
+nvim config.def.h
+sudo make install
+ls
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+nvim config.def.h
+rm configh.h
+rm config.h
+sudo make install
+cd ../st
+nvim config.h
+sudo make install
+nvim config.h
+cd .config/st
+nvim config.h
+sudo make install
+cd .config/st
+nvim config.h
+sudo make install
+nvim .xprofile
+sudo reboot
+ll
+gotop
+cd svea_starter
+cd src/svea_core/scripts/project
+nvim main.py
+nvim main.py
+nvim main.py
+sudo poweroff
+ranger
+paru -Syu ranger
+ranger
+cd .config/dwm
+nvim config.def.h
+rm config.h
+sudo make install
+nvim config.def.h
+rm config.h
+sudo make install
+nvim config.def.h
+cd ../old-dwm/config.h
+nvim ../old-dwm/config.h
+ls
+rm *.rej *.orig
+ls
+patch < patches/dwm-alwayscenter-20200625-f04cac6.diff
+nvim dwm.c.rej
+st -c "floating" -g "90x25+500+500"
+nvim .config/old-dwm/config.h
+nvim .config/old-dwm/config.h
+ls
+cd .config/old-dwm
+ls
+gd
+ls
+ll
+ls ../dwm
+nvim ../dwm/transient.c
+ls
+ll
+nvim dwm.c.rej
+gs
+nvim dwm.c
+neofetch
+nvim ../dwm/config.def.h
+cd ../dwm
+rm config.h
+sudo make install
+nvim .config/dwm/config.def.h
+cd .config/dwm
+ls
+ls
+rm *rej
+patch < patches/dwm-moveresize-20210823-a786211.diff
+nvim config.def.h
+nvim config.def.h
+rm config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm config.h
+sudo make install
+nvim .config/dwm/config.def.h
+cd .config/dwm
+sudo make install
+rm config.h
+sudo make install
+echo $BROWSER
+echo "$BROWSER"
+nvim .config/dwm/config.def.h
+rm config.h
+cd .config/dwm
+rm config.h
+sudo make install
+nvim .config/dwm/config.def.h
+rm config.h
+cd .config/dwm
+rm config.h
+sudo make install
+nvim config.def.h
+rm config.h
+sudo make install
+nvim .config/dwm/config.def.h
+rm config.h
+cd .config/dwm
+rm config.h
+s
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm config.h
+sudo make install
+gotop
+cd .config/dwm
+nvim config.def.h
+rm config.h
+sudo make install
+neofetch
+gotop
+sudo poweroff
+cd .config/old-dwm
+nvim config.h
+cd ../dwm
+rm config.h
+sudo make install
+nvim config.def.h
+nvim config.def.h
+sudo make install
+rm -f config.h
+sudo make install
+patch < patches/dwm-scratchpads-20200414-728d397b.diff
+rm -f config.h
+nvim config.def.h
+rm -f config.h
+sudo make install
+paru keepassxc
+calc
+paru calc
+paru -Syu calc
+calc
+neofetch
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+paru -Rns calc
+paru -Syu bc
+bc
+gc
+bc
+cd .config/dwm
+nvim config.def.h
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+bc
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+cd
+nvim .xinitrc
+nvim .xprofile
+nvim .xprofile
+ls
+cd .config/dwm
+nvim config.def.h
+rm -f config.h
+sudo make install
+c
+cd
+cd .config/zsh/
+cd
+nvim .config/zsh/zsh-aliases
+exit
+gs
+exit
+gs
+exit
+gs
+ls
+cd dot_config
+ls
+exit

@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# --- General Aliases ----
+
+# arch package installation
+alias par='paru -Syu'
+
+# listing
+alias ls='ls -hN --color=auto --group-directories-first'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# grep
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# storage
+alias df='df -h'
+alias free='free -h'
+
+# file maintenance 
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias mkd='mkdir -pv'
+
+# --- Git Aliases ---
+
+alias ga='git add'
+alias gC='git commit'
+alias gp='git pull'
+alias gP='git push'
+alias gc='git checkout'
+alias gs='git status'
+alias gl='git log --graph --oneline --decorate'
+alias gd='git diff'
+alias gb='git branch'
+alias gr='git reset'
+alias gM='git merge'
+alias gR='git rebase'
+

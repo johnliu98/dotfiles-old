@@ -1,0 +1,23 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/LunarVim/Neovim-from-scratch.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "01-options"]
+	remote = origin
+	merge = refs/heads/01-options
+[branch "02-keymaps"]
+	remote = origin
+	merge = refs/heads/02-keymaps
+[branch "03-plugins"]
+	remote = origin
+	merge = refs/heads/03-plugins
+[branch "04-colorscheme"]
+	remote = origin
+	merge = refs/heads/04-colorscheme
