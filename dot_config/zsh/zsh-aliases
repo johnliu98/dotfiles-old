@@ -2,10 +2,6 @@
 
 # --- General Aliases ----
 
-# arch package installation
-alias pars='paru -Syu'
-alias parr='paru -Rns'
-
 # listing
 alias ls='ls -hN --color=auto --group-directories-first'
 alias dir='dir --color=auto'
