@@ -1,0 +1,21 @@
+#!/bin/sh
+
+time=$(date '+%I')
+
+case "$time" in
+	"00") timeicon="🕛" ;;
+	"01") timeicon="🕐" ;;
+	"02") timeicon="🕑" ;;
+	"03") timeicon="🕒" ;;
+	"04") timeicon="🕓" ;;
+	"05") timeicon="🕔" ;;
+	"06") timeicon="🕕" ;;
+	"07") timeicon="🕖" ;;
+	"08") timeicon="🕗" ;;
+	"09") timeicon="🕘" ;;
+	"10") timeicon="🕙" ;;
+	"11") timeicon="🕚" ;;
+	"12") timeicon="🕛" ;;
+esac
+
+date "+$timeicon%H:%M"

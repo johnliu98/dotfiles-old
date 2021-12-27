@@ -1,3 +1,11 @@
 #!/bin/sh
 
-sensors | awk '/Core 0/ {print "🌡" $3}'
+temp="$(sensors | awk '/Core 0/ {print $3}' | cut -c2-3)"
+case "$temp" in
+    1[0-9][0-9]|9[0-9])     icon="" ;;
+    8[0-9]|7[0-9])          icon="" ;;
+    6[0-9]|5[0-9]|4[0-9])   icon="" ;;
+    *)                      icon="" ;;
+esac
+
+printf "%s" "$icon $temp°C"

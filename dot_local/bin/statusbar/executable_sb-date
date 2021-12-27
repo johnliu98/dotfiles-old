@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dateicon=" "
+date "+$dateicon%a %d %b %Y"
