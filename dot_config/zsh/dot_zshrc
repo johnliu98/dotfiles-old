@@ -83,3 +83,5 @@ export BROWSER="google-chrome-stable"
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
 
+# Load system information with random ascii art
+shuf -n 1 $ZDOTDIR/fm6000-commands.txt | sh

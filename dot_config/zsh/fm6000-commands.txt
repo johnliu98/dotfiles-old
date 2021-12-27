@@ -1,0 +1,16 @@
+fm6000 -f ~/Pictures/ascii/wolf-ascii.txt       -c bright_cyan      -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/penguin-ascii.txt    -c bright_magenta   -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/shark-ascii.txt      -c bright_blue      -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/elephant-ascii.txt   -c white            -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/tiger-ascii.txt      -c bright_yellow    -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/dragon-ascii.txt     -c bright_green     -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/chicken-ascii.txt    -c bright_yellow    -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/monkey-ascii.txt     -c bright_white     -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/fish-ascii.txt       -c blue             -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/hamster-ascii.txt    -c bright_yellow    -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/goat-ascii.txt       -c bright_white     -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/squirrel-ascii.txt   -c yellow           -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/butterfly-ascii.txt  -c magenta          -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/koala-ascii.txt      -c white            -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/dolphin-ascii.txt    -c bright_blue      -de "dwm"   -o "Arch Linux"   --not_de
+fm6000 -f ~/Pictures/ascii/camel-ascii.txt      -c bright_yellow    -de "dwm"   -o "Arch Linux"   --not_de
