@@ -1,0 +1,21 @@
+0000000000000000000000000000000000000000 8cebbf6b111b664aecf8a29039c483ae4db5afe7 john <john@magic.(none)> 1640204556 +0100	clone: from https://github.com/LunarVim/Neovim-from-scratch.git
+8cebbf6b111b664aecf8a29039c483ae4db5afe7 6260c377370a7fa9ab5d9bade00380b77d3367d4 john <john@magic.(none)> 1640204585 +0100	checkout: moving from master to 01-options
+6260c377370a7fa9ab5d9bade00380b77d3367d4 e1ac27496fccd2e0accb79c6ac2097865feff14b john <john@magic.(none)> 1640204658 +0100	checkout: moving from 01-options to 02-keymaps
+e1ac27496fccd2e0accb79c6ac2097865feff14b 4e038120bf179d7220638ad3e17bf4974ed50fff john <john@magic.(none)> 1640204936 +0100	checkout: moving from 02-keymaps to 03-plugins
+4e038120bf179d7220638ad3e17bf4974ed50fff 68de5d4fab1cd11d74829947a2809c1899280dea john <john@magic.(none)> 1640206489 +0100	checkout: moving from 03-plugins to 04-colorscheme
+68de5d4fab1cd11d74829947a2809c1899280dea 68de5d4fab1cd11d74829947a2809c1899280dea John Liu <johnliu@kth.se> 1640701276 +0100	reset: moving to HEAD
+68de5d4fab1cd11d74829947a2809c1899280dea 2683495c3df5ee7d3682897e0d47b0facb3cedc9 John Liu <johnliu@kth.se> 1640701277 +0100	checkout: moving from 04-colorscheme to origin/05-completion
+2683495c3df5ee7d3682897e0d47b0facb3cedc9 68de5d4fab1cd11d74829947a2809c1899280dea John Liu <johnliu@kth.se> 1640701289 +0100	checkout: moving from 2683495c3df5ee7d3682897e0d47b0facb3cedc9 to 04-colorscheme
+68de5d4fab1cd11d74829947a2809c1899280dea 2683495c3df5ee7d3682897e0d47b0facb3cedc9 John Liu <johnliu@kth.se> 1640701296 +0100	checkout: moving from 04-colorscheme to 05-completion
+2683495c3df5ee7d3682897e0d47b0facb3cedc9 2683495c3df5ee7d3682897e0d47b0facb3cedc9 John Liu <johnliu@kth.se> 1640701318 +0100	reset: moving to HEAD
+2683495c3df5ee7d3682897e0d47b0facb3cedc9 2683495c3df5ee7d3682897e0d47b0facb3cedc9 John Liu <johnliu@kth.se> 1640703437 +0100	reset: moving to HEAD
+2683495c3df5ee7d3682897e0d47b0facb3cedc9 0981b2838275468ad1863aba908379af63209e7a John Liu <johnliu@kth.se> 1640703439 +0100	checkout: moving from 05-completion to 06-LSP
+0981b2838275468ad1863aba908379af63209e7a 0981b2838275468ad1863aba908379af63209e7a John Liu <johnliu@kth.se> 1640707319 +0100	reset: moving to HEAD
+0981b2838275468ad1863aba908379af63209e7a 4b0d085006724b6f5a1d6db5b980800db44e0e88 John Liu <johnliu@kth.se> 1640707338 +0100	checkout: moving from 06-LSP to 07-Telescope
+4b0d085006724b6f5a1d6db5b980800db44e0e88 4b0d085006724b6f5a1d6db5b980800db44e0e88 John Liu <johnliu@kth.se> 1640707518 +0100	reset: moving to HEAD
+4b0d085006724b6f5a1d6db5b980800db44e0e88 63cb259f98568820d5af6f346bff88c8eab4029b John Liu <johnliu@kth.se> 1640709427 +0100	checkout: moving from 07-Telescope to 08-treesitter
+63cb259f98568820d5af6f346bff88c8eab4029b 4b0d085006724b6f5a1d6db5b980800db44e0e88 John Liu <johnliu@kth.se> 1640709611 +0100	checkout: moving from 08-treesitter to 07-Telescope
+4b0d085006724b6f5a1d6db5b980800db44e0e88 63cb259f98568820d5af6f346bff88c8eab4029b John Liu <johnliu@kth.se> 1640709650 +0100	checkout: moving from 07-Telescope to 08-treesitter
+63cb259f98568820d5af6f346bff88c8eab4029b 63cb259f98568820d5af6f346bff88c8eab4029b John Liu <johnliu@kth.se> 1640725143 +0100	reset: moving to HEAD
+63cb259f98568820d5af6f346bff88c8eab4029b b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 John Liu <johnliu@kth.se> 1640725152 +0100	checkout: moving from 08-treesitter to 09-autopairs
+b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 John Liu <johnliu@kth.se> 1640725231 +0100	reset: moving to HEAD

@@ -23,16 +23,17 @@ local options = {
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 4,                          -- the number of spaces inserted for each indentation
-  tabstop = 2,                             -- insert 2 spaces for a tab
+  tabstop = 4,                             -- insert 2 spaces for a tab
   cursorline = true,                       -- highlight the current line
   number = true,                           -- set numbered lines
-  relativenumber = false,                  -- set relative numbered lines
+  relativenumber = true,                  -- set relative numbered lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
-  guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  guifont = "monospace:h18",               -- the font used in graphical neovim applications
+  spellsuggest = { "fast", 10 },           -- only show 20 suggestions for spell correction
 }
 
 vim.opt.shortmess:append "c"
@@ -42,5 +43,23 @@ for k, v in pairs(options) do
 end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
+-- vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+-- Autocommands
+vim.cmd ([[
+    augroup _textfile
+    autocmd BufEnter *.txt :set wrap linebreak nolist
+    autocmd BufEnter *.txt :setlocal spell spelllang=en_us
+    augroup end
+
+    augroup _latex
+    autocmd BufEnter *.tex :set wrap linebreak nolist
+    autocmd BufEnter *.tex :setlocal spell spelllang=en_us
+    autocmd BufWritePost *.tex :silent !pdflatex % > /dev/null
+    augroup end
+
+    augroup _suckless
+    autocmd BufWritePost config.h :!sudo make install
+    augroup end
+]])
