@@ -3,18 +3,21 @@
 # Displays todays precipication chance (☔) and daiy weather (🌞)
 
 # If we have internet, get a weather report from wttr.in and store it locally.
-# You could set up a shell alias to view the full file in a pager in the terminal if desired.
 weatherreport="${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
 getforecast() { curl -s "wttr.in" > "$weatherreport" || exit 1 ;}
+temperaturereport="${XDG_DATA_HOME:-$HOME/.local/share}/temperaturereport"
+gettemp() { curl -s "wttr.in?format=1" > "$temperaturereport" || exit 1 ;}
 
 # Some very particular and terse stream manipulation.
 showweather() { printf "%s" "$(sed '16q;d' "$weatherreport" |
 	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')" 
-    printf "%s" " $(curl -s 'wttr.in?format=1' | cut -c1-3,7- | sed 's/ //g')" ;}
+    printf "%s" " $(sed 's/ //g' "$temperaturereport")" ;}
 
-# The test if our forcecast is updated to the day.
+# The test if our forcecast and temperature is updated to the day and hour, respectively.
 # If it isn't, download a new weather report from wttr.in with the above function.
 [ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
 	getforecast
+[ "$(stat -c %y "$temperaturereport" 2>/dev/null | cut -d' ' -f2 | cut -d':' -f1)" = "$(date '+%H')" ] ||
+    gettemp
 
 showweather

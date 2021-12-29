@@ -51,18 +51,21 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "", "", "", "", "", "ﲆ", "", "", "" };
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",	  NULL,			NULL,		0,				1,			 -1 },
-	{ "Firefox",  NULL,			NULL,		1 << 8,			0,			 -1 },
-	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
-	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		  "spcalc",	    NULL,		SPTAG(2),		1,			 -1 },
+	/* class                instance        title               tags mask     isfloating   monitor */
+	{ "Gimp",	            NULL,			NULL,		        0,				1,			 -1 },
+	{ "Firefox",            NULL,			NULL,		        1 << 8,			0,			 -1 },
+	{ NULL,                 NULL,			"Google Chrome",	1 << 2,			0,			 -1 },
+	{ "Slack",              NULL,			NULL,		        1 << 8,			0,			 -1 },
+	{ "Zulip",              NULL,			NULL,		        1 << 8,			0,			 -1 },
+	{ NULL,		            "spterm",		NULL,		        SPTAG(0),		1,			 -1 },
+	{ NULL,		            "spfm",		    NULL,		        SPTAG(1),		1,			 -1 },
+	{ NULL,		            "spcalc",	    NULL,		        SPTAG(2),		1,			 -1 },
 };
 
 /* layout(s) */
@@ -91,6 +94,12 @@ static const Layout layouts[] = {
 	{ ">M>",      centeredfloatingmaster },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
+};
+
+static const Taglayout taglayouts[] = {
+	/* tag		layout */
+	{ 1,		{.v = &layouts[13]} },
+	{ 9,		{.v = &layouts[1]} },
 };
 
 /* key definitions */
@@ -122,6 +131,8 @@ static Key keys[] = {
 	{ MODKEY,			            XK_s,	            spawn,	        SHCMD("slack") },
 	{ MODKEY,			            XK_z,	            spawn,	        SHCMD("zulip") },
 	{ MODKEY,			            XK_apostrophe,      spawn,          SHCMD(". ~/.local/bin/dmenu/dmenu-emoji") },
+	{ MODKEY,			            XK_Print,           spawn,          SHCMD("import -window root $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
+	{ MODKEY|ShiftMask,			    XK_Print,           spawn,          SHCMD("import $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
 	{ MODKEY,                       XK_b,               togglebar,      {0} },
     { MODKEY|ShiftMask,             XK_r,               self_restart,   {0} },
 	{ MODKEY|ShiftMask,             XK_q,               quit,           {0} },
@@ -182,16 +193,16 @@ static Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	/* click                event mask          button          function        argument */
+	{ ClkLtSymbol,          0,                  Button1,        setlayout,      {0} },
+	{ ClkLtSymbol,          0,                  Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,          0,                  Button2,        zoom,           {0} },
+	{ ClkStatusText,        0,                  Button2,        spawn,          {.v = termcmd } },
+	{ ClkClientWin,         MODKEY,             Button1,        movemouse,      {0} },
+	{ ClkClientWin,         MODKEY,             Button2,        togglefloating, {0} },
+	{ ClkClientWin,         MODKEY|ShiftMask,   Button1,        resizemouse,    {0} },
+	{ ClkTagBar,            0,                  Button1,        view,           {0} },
+	{ ClkTagBar,            0,                  Button3,        toggleview,     {0} },
+	{ ClkTagBar,            MODKEY,             Button1,        tag,            {0} },
+	{ ClkTagBar,            MODKEY,             Button3,        toggletag,      {0} },
 };
