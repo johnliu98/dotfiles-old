@@ -1,6 +1,13 @@
 #!/bin/sh
 
-temp="$(sensors | awk '/Core 0/ {print $3}' | cut -c2-3)"
+case $BUTTON in
+	1) notify-send "🖥 CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head -n 5)\\n(100% per core)" ;;
+	3) notify-send "🖥 CP" "\- Shows CPU temperature.\nClick to show intensive processes.\nMiddle click to open gotop." ;;
+	2) setsid -f "$TERMINAL" -e gotop ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+temp="$(sensors | awk '/Package id 0/ {print $4}' | cut -c2-3)"
 case "$temp" in
     1[0-9][0-9]|9[0-9])     icon="" ;;
     8[0-9]|7[0-9])          icon="" ;;

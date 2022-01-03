@@ -40,6 +40,7 @@
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
+#include <X11/extensions/shape.h>
 #include <X11/Xft/Xft.h>
 
 #include "drw.h"
@@ -190,6 +191,7 @@ static void focusstack(const Arg *arg);
 static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
+static pid_t getstatusbarpid();
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
@@ -225,6 +227,9 @@ static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
+static void sigstatusbar(const Arg *arg);
+static void sighup(int unused);
+static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
@@ -255,6 +260,7 @@ static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void xinitvisual();
 static void zoom(const Arg *arg);
+static void roundcorners(Client *c);
 
 /* variables */
 static const char autostartblocksh[] = "autostart_blocking.sh";
@@ -263,6 +269,9 @@ static const char broken[] = "broken";
 static const char dwmdir[] = "dwm";
 static const char localshare[] = ".local/share";
 static char stext[256];
+static int statusw;
+static int statussig;
+static pid_t statuspid = -1;
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh, blw = 0;      /* bar geometry */
@@ -286,6 +295,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[UnmapNotify] = unmapnotify
 };
 static Atom wmatom[WMLast], netatom[NetLast];
+static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
@@ -466,6 +476,7 @@ buttonpress(XEvent *e)
 	Client *c;
 	Monitor *m;
 	XButtonPressedEvent *ev = &e->xbutton;
+	char *text, *s, ch;
 
 	click = ClkRootWin;
 	/* focus monitor if necessary */
@@ -490,9 +501,23 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + blw)
 			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
+		else if (ev->x > selmon->ww - statusw) {
+			x = selmon->ww - statusw;
 			click = ClkStatusText;
-		else
+			statussig = 0;
+			for (text = s = stext; *s && x <= ev->x; s++) {
+				if ((unsigned char)(*s) < ' ') {
+					ch = *s;
+					*s = '\0';
+					x += TEXTW(text) - lrpad;
+					*s = ch;
+					text = s + 1;
+					if (x >= ev->x)
+						break;
+					statussig = ch;
+				}
+			}
+		} else
 			click = ClkWinTitle;
 	} else if ((c = wintoclient(ev->window))) {
 		focus(c);
@@ -783,8 +808,6 @@ void
 drawbar(Monitor *m)
 {
 	int x, w, tw = 0, mw, ew = 0;
-	int boxs = drw->fonts->h / 9;
-	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0, n = 0;
 	Client *c;
 
@@ -793,9 +816,24 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
+		char *text, *s, ch;
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+
+		x = 0;
+		for (text = s = stext; *s; s++) {
+			if ((unsigned char)(*s) < ' ') {
+				ch = *s;
+				*s = '\0';
+				tw = TEXTW(text) - lrpad;
+				drw_text(drw, m->ww - statusw + x, 0, tw, bh, 0, text, 0);
+				x += tw;
+				*s = ch;
+				text = s + 1;
+			}
+		}
+		tw = TEXTW(text) - lrpad + 2;
+		drw_text(drw, m->ww - statusw + x, 0, tw, bh, 0, text, 0);
+		tw = statusw;
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -988,6 +1026,30 @@ getatomprop(Client *c, Atom prop)
 		XFree(p);
 	}
 	return atom;
+}
+
+pid_t
+getstatusbarpid()
+{
+	char buf[32], *str = buf, *c;
+	FILE *fp;
+
+	if (statuspid > 0) {
+		snprintf(buf, sizeof(buf), "/proc/%u/cmdline", statuspid);
+		if ((fp = fopen(buf, "r"))) {
+			fgets(buf, sizeof(buf), fp);
+			while ((c = strchr(str, '/')))
+				str = c + 1;
+			fclose(fp);
+			if (!strcmp(str, STATUSBAR))
+				return statuspid;
+		}
+	}
+	if (!(fp = popen("pidof -s "STATUSBAR, "r")))
+		return -1;
+	fgets(buf, sizeof(buf), fp);
+	pclose(fp);
+	return strtol(buf, NULL, 10);
 }
 
 int
@@ -1369,6 +1431,7 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
+	if(arg->i) restart = 1;
 	running = 0;
 }
 
@@ -1405,6 +1468,7 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
+    roundcorners(c);
 	XSync(dpy, False);
 }
 
@@ -1471,6 +1535,10 @@ restack(Monitor *m)
 	Client *c;
 	XEvent ev;
 	XWindowChanges wc;
+
+    for (c = m->stack; c; c = c->snext) {
+        roundcorners(c);
+    }
 
 	drawbar(m);
 	if (!m->sel)
@@ -1734,6 +1802,9 @@ setup(void)
 	/* clean up any zombies immediately */
 	sigchld(0);
 
+	signal(SIGHUP, sighup);
+	signal(SIGTERM, sigterm);
+
 	/* init screen */
 	screen = DefaultScreen(dpy);
 	sw = DisplayWidth(dpy, screen);
@@ -1840,6 +1911,34 @@ sigchld(int unused)
 }
 
 void
+sighup(int unused)
+{
+	Arg a = {.i = 1};
+	quit(&a);
+}
+
+void
+sigterm(int unused)
+{
+	Arg a = {.i = 0};
+	quit(&a);
+}
+
+void
+sigstatusbar(const Arg *arg)
+{
+	union sigval sv;
+
+	if (!statussig)
+		return;
+	sv.sival_int = arg->i;
+	if ((statuspid = getstatusbarpid()) <= 0)
+		return;
+
+	sigqueue(statuspid, SIGRTMIN+statussig, sv);
+}
+
+void
 spawn(const Arg *arg)
 {
 	if (arg->v == dmenucmd)
@@ -1925,8 +2024,10 @@ togglescratch(const Arg *arg)
 void
 togglefullscr(const Arg *arg)
 {
-  if(selmon->sel)
+  if(selmon->sel) {
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+
+  }
 }
 
 void
@@ -2223,8 +2324,25 @@ updatesizehints(Client *c)
 void
 updatestatus(void)
 {
-	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
+	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) {
 		strcpy(stext, "dwm-"VERSION);
+		statusw = TEXTW(stext) - lrpad + 2;
+	} else {
+		char *text, *s, ch;
+
+		statusw  = 0;
+		for (text = s = stext; *s; s++) {
+			if ((unsigned char)(*s) < ' ') {
+				ch = *s;
+				*s = '\0';
+				statusw += TEXTW(text) - lrpad;
+				*s = ch;
+				text = s + 1;
+			}
+		}
+		statusw += TEXTW(text) - lrpad + 2;
+
+	}
 	drawbar(selmon);
 }
 
@@ -2427,6 +2545,54 @@ zoom(const Arg *arg)
 	pop(c);
 }
 
+void
+roundcorners(Client *c)
+{
+    Window w = c->win;
+    XWindowAttributes wa;
+    XGetWindowAttributes(dpy, w, &wa);
+
+    // If this returns null, the window is invalid.
+    if(!XGetWindowAttributes(dpy, w, &wa))
+        return;
+
+    int width = borderpx * 2 + wa.width;
+    int height = borderpx * 2 + wa.height;
+    /* int width = win_attr.border_width * 2 + win_attr.width; */
+    /* int height = win_attr.border_width * 2 + win_attr.height; */
+    int rad = cornerrad * enablegaps * (1-c->isfullscreen); //config_theme_cornerradius;
+    int dia = 2 * rad;
+
+    // do not try to round if the window would be smaller than the corners
+    if(width < dia || height < dia)
+        return;
+
+    Pixmap mask = XCreatePixmap(dpy, w, width, height, 1);
+    // if this returns null, the mask is not drawable
+    if(!mask)
+        return;
+
+    XGCValues xgcv;
+    GC shape_gc = XCreateGC(dpy, mask, 0, &xgcv);
+    if(!shape_gc) {
+        XFreePixmap(dpy, mask);
+        return;
+    }
+
+    XSetForeground(dpy, shape_gc, 0);
+    XFillRectangle(dpy, mask, shape_gc, 0, 0, width, height);
+    XSetForeground(dpy, shape_gc, 1);
+    XFillArc(dpy, mask, shape_gc, 0, 0, dia, dia, 0, 23040);
+    XFillArc(dpy, mask, shape_gc, width-dia-1, 0, dia, dia, 0, 23040);
+    XFillArc(dpy, mask, shape_gc, 0, height-dia-1, dia, dia, 0, 23040);
+    XFillArc(dpy, mask, shape_gc, width-dia-1, height-dia-1, dia, dia, 0, 23040);
+    XFillRectangle(dpy, mask, shape_gc, rad, 0, width-dia, height);
+    XFillRectangle(dpy, mask, shape_gc, 0, rad, width, height-dia);
+    XShapeCombineMask(dpy, w, ShapeBounding, 0-wa.border_width, 0-wa.border_width, mask, ShapeSet);
+    XFreePixmap(dpy, mask);
+    XFreeGC(dpy, shape_gc);
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -2447,6 +2613,7 @@ main(int argc, char *argv[])
 	scan();
 	runautostart();
 	run();
+	if(restart) execvp(argv[0], argv);
 	cleanup();
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;

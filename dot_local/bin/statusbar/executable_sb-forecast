@@ -2,22 +2,27 @@
 
 # Displays todays precipication chance (☔) and daiy weather (🌞)
 
-# If we have internet, get a weather report from wttr.in and store it locally.
+# Paths to weather data
 weatherreport="${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
-getforecast() { curl -s "wttr.in" > "$weatherreport" || exit 1 ;}
-temperaturereport="${XDG_DATA_HOME:-$HOME/.local/share}/temperaturereport"
-gettemp() { curl -s "wttr.in?format=1" > "$temperaturereport" || exit 1 ;}
+tempreport="${XDG_DATA_HOME:-$HOME/.local/share}/tempreport"
 
 # Some very particular and terse stream manipulation.
-showweather() { printf "%s" "$(sed '16q;d' "$weatherreport" |
-	grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')" 
-    printf "%s" " $(sed 's/ //g' "$temperaturereport")" ;}
+showweather() {
+    printf "%s" "$(sed '16q;d' "$weatherreport" | grep -wo "[0-9]*%" | sort -rn | sed "s/^/☔/g;1q" | tr -d '\n')" 
+    printf "%s" " $(sed 's/ //g' $tempreport)" ;}
 
-# The test if our forcecast and temperature is updated to the day and hour, respectively.
-# If it isn't, download a new weather report from wttr.in with the above function.
-[ "$(stat -c %y "$weatherreport" 2>/dev/null | cut -d' ' -f1)" = "$(date '+%Y-%m-%d')" ] ||
-	getforecast
-[ "$(stat -c %y "$temperaturereport" 2>/dev/null | cut -d' ' -f2 | cut -d':' -f1)" = "$(date '+%H')" ] ||
-    gettemp
+case $BUTTON in
+	1) setsid -f "$TERMINAL" -e less -Srf "$weatherreport" ;;
+    3)
+    precipitation=$(sed '16q;d' "$weatherreport" | grep -wo "[0-9]*%" | sort -rn | sed "s/^//g;1q")
+    dailylow=$(sed '13q;d' $weatherreport | grep -o "m\\([-+]\\)*[0-9]\\+" | sed 's/+//g' | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | sed 's/[\w,m]//g' | sed -n 1p)
+    dailyhigh=$(sed '13q;d' $weatherreport | grep -o "m\\([-+]\\)*[0-9]\\+" | sed 's/+//g' | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | sed 's/[\w,m]//g' | sed -n 2p)
+	notify-send "🌈 Weather" "\- Left click for full forecast.
+Middle click to update forecast.
+☔: $precipitation (Chance of rain/snow)
+🥶: $dailylow°C (Daily low)
+🌞: $dailyhigh°C (Daily high)" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
 
 showweather

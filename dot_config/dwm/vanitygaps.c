@@ -1,13 +1,3 @@
-/* Key binding functions */
-static void defaultgaps(const Arg *arg);
-static void incrgaps(const Arg *arg);
-static void incrigaps(const Arg *arg);
-static void incrogaps(const Arg *arg);
-static void incrohgaps(const Arg *arg);
-static void incrovgaps(const Arg *arg);
-static void incrihgaps(const Arg *arg);
-static void incrivgaps(const Arg *arg);
-static void togglegaps(const Arg *arg);
 /* Layouts (delete the ones you do not need) */
 static void bstack(Monitor *m);
 static void bstackhoriz(Monitor *m);
@@ -23,121 +13,11 @@ static void tile(Monitor *m);
 /* Internals */
 static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
 static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
-static void setgaps(int oh, int ov, int ih, int iv);
 
 /* Settings */
 #if !PERTAG_PATCH
 static int enablegaps = 1;
 #endif // PERTAG_PATCH
-
-void
-setgaps(int oh, int ov, int ih, int iv)
-{
-	if (oh < 0) oh = 0;
-	if (ov < 0) ov = 0;
-	if (ih < 0) ih = 0;
-	if (iv < 0) iv = 0;
-
-	selmon->gappoh = oh;
-	selmon->gappov = ov;
-	selmon->gappih = ih;
-	selmon->gappiv = iv;
-	arrange(selmon);
-}
-
-void
-togglegaps(const Arg *arg)
-{
-	#if PERTAG_PATCH
-	selmon->pertag->enablegaps[selmon->pertag->curtag] = !selmon->pertag->enablegaps[selmon->pertag->curtag];
-	#else
-	enablegaps = !enablegaps;
-	#endif // PERTAG_PATCH
-	arrange(NULL);
-}
-
-void
-defaultgaps(const Arg *arg)
-{
-	setgaps(gappoh, gappov, gappih, gappiv);
-}
-
-void
-incrgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh + arg->i,
-		selmon->gappov + arg->i,
-		selmon->gappih + arg->i,
-		selmon->gappiv + arg->i
-	);
-}
-
-void
-incrigaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov,
-		selmon->gappih + arg->i,
-		selmon->gappiv + arg->i
-	);
-}
-
-void
-incrogaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh + arg->i,
-		selmon->gappov + arg->i,
-		selmon->gappih,
-		selmon->gappiv
-	);
-}
-
-void
-incrohgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh + arg->i,
-		selmon->gappov,
-		selmon->gappih,
-		selmon->gappiv
-	);
-}
-
-void
-incrovgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov + arg->i,
-		selmon->gappih,
-		selmon->gappiv
-	);
-}
-
-void
-incrihgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov,
-		selmon->gappih + arg->i,
-		selmon->gappiv
-	);
-}
-
-void
-incrivgaps(const Arg *arg)
-{
-	setgaps(
-		selmon->gappoh,
-		selmon->gappov,
-		selmon->gappih,
-		selmon->gappiv + arg->i
-	);
-}
 
 void
 getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc)
@@ -186,14 +66,9 @@ getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *s
 	*sr = ssize - stotal; // the remainder (rest) of pixels after an even stack split
 }
 
-/***
- * Layouts
- */
+/* Layouts */
 
-/*
- * Bottomstack layout + gaps
- * https://dwm.suckless.org/patches/bottomstack/
- */
+/* Bottomstack layout + gaps */
 static void
 bstack(Monitor *m)
 {
@@ -277,10 +152,7 @@ bstackhoriz(Monitor *m)
 	}
 }
 
-/*
- * Centred master layout + gaps
- * https://dwm.suckless.org/patches/centeredmaster/
- */
+/* Centred master layout + gaps */
 void
 centeredmaster(Monitor *m)
 {
@@ -419,10 +291,7 @@ centeredfloatingmaster(Monitor *m)
 		}
 }
 
-/*
- * Deck layout + gaps
- * https://dwm.suckless.org/patches/deck/
- */
+/* Deck layout + gaps */
 void
 deck(Monitor *m)
 {
@@ -464,10 +333,7 @@ deck(Monitor *m)
 		}
 }
 
-/*
- * Fibonacci layout + gaps
- * https://dwm.suckless.org/patches/fibonacci/
- */
+/* Fibonacci layout + gaps */
 void
 fibonacci(Monitor *m, int s)
 {
@@ -567,10 +433,7 @@ spiral(Monitor *m)
 	fibonacci(m, 0);
 }
 
-/*
- * Gappless grid layout + gaps (ironically)
- * https://dwm.suckless.org/patches/gaplessgrid/
- */
+/* Gappless grid layout + gaps (ironically) */
 void
 gaplessgrid(Monitor *m)
 {
@@ -620,10 +483,7 @@ gaplessgrid(Monitor *m)
 	}
 }
 
-/*
- * Gridmode layout + gaps
- * https://dwm.suckless.org/patches/gridmode/
- */
+/* Gridmode layout + gaps */
 void
 grid(Monitor *m)
 {
@@ -654,10 +514,7 @@ grid(Monitor *m)
 	}
 }
 
-/*
- * Horizontal grid layout + gaps
- * https://dwm.suckless.org/patches/horizgrid/
- */
+/* Horizontal grid layout + gaps */
 void
 horizgrid(Monitor *m) {
 	Client *c;
@@ -708,10 +565,7 @@ horizgrid(Monitor *m) {
 		}
 }
 
-/*
- * nrowgrid layout + gaps
- * https://dwm.suckless.org/patches/nrowgrid/
- */
+/* nrowgrid layout + gaps */
 void
 nrowgrid(Monitor *m)
 {
@@ -766,9 +620,7 @@ nrowgrid(Monitor *m)
 	}
 }
 
-/*
- * Default tile layout + gaps
- */
+/* Default tile layout + gaps */
 static void
 tile(Monitor *m)
 {

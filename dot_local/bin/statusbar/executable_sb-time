@@ -1,5 +1,10 @@
 #!/bin/sh
 
+case $BUTTON in
+	1) notify-send "Not implemented..." ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
 time=$(date '+%I')
 
 case "$time" in

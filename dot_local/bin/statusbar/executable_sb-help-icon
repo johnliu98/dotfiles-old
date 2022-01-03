@@ -2,16 +2,7 @@
 
 # The clickable help menu. Middle click to restart wm.
 
-# If dwm is running, use dwm's readme and restart.
-pidof dwm >/dev/null &&
-	READMEFILE=/usr/local/share/dwm/larbs.mom
-	restartwm() { pkill -HUP dwm ;} ||
-		restartwm() { i3 restart ;}
-
-case $BLOCK_BUTTON in
-	1) notify-send "❓ Help module";;
-	2) restartwm ;;
-	3) notify-send "❓ Help module" "\- Left click to open LARBS guide.
-- Middle click to refresh window manager." ;;
+case $BUTTON in
+	1) notify-send "❓ Help module" "\- Shift click to open script." ;;
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
-esac; echo "❓"
+esac; printf "❓"
