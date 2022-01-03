@@ -23,13 +23,15 @@ alias free='free -h'
 # file maintenance 
 alias mkd='mkdir -pv'
 
-# safe commands
-# alias cp='cp -i'
-# alias mv='mv -i'
-# alias rm='rm -i'
+# trash manager
+alias rm='trash-put'
+alias res='trash-restore'
+alias tls='trash-list | sort -k 1'
+
+# ranger
+alias ra=". ranger"
 
 # --- Git Aliases ---
-
 alias ga='git add'
 alias gC='git commit'
 alias gp='git pull'

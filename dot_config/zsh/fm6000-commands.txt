@@ -8,7 +8,6 @@ fm6000 -f ~/Pictures/ascii/chicken-ascii.txt    -c bright_yellow    -de "dwm"   
 fm6000 -f ~/Pictures/ascii/monkey-ascii.txt     -c bright_white     -de "dwm"   -o "Arch Linux"   --not_de
 fm6000 -f ~/Pictures/ascii/fish-ascii.txt       -c blue             -de "dwm"   -o "Arch Linux"   --not_de
 fm6000 -f ~/Pictures/ascii/hamster-ascii.txt    -c bright_yellow    -de "dwm"   -o "Arch Linux"   --not_de
-fm6000 -f ~/Pictures/ascii/goat-ascii.txt       -c bright_white     -de "dwm"   -o "Arch Linux"   --not_de
 fm6000 -f ~/Pictures/ascii/squirrel-ascii.txt   -c yellow           -de "dwm"   -o "Arch Linux"   --not_de
 fm6000 -f ~/Pictures/ascii/butterfly-ascii.txt  -c magenta          -de "dwm"   -o "Arch Linux"   --not_de
 fm6000 -f ~/Pictures/ascii/koala-ascii.txt      -c white            -de "dwm"   -o "Arch Linux"   --not_de

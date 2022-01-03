@@ -80,8 +80,14 @@ export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="google-chrome-stable"
 
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Load system information with random ascii art
-shuf -n 1 $ZDOTDIR/fm6000-commands.txt | sh
+# shuf -n 1 $ZDOTDIR/fm6000-commands.txt | sh
+
+# Load system information
+pfetch
