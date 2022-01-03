@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# confirmation for command exit command
+confirm() {
+    [ $(echo -e 'No\nYes' | dmenu -i -l 2 -p 'Are you sure?') \
+        == 'Yes' ] && $1
+}
+
+exit_opt="$(echo -e 'Shutdown\nReboot\nLogout' | dmenu -i -l 3)"
+case $exit_opt in
+    Shutdown) confirm "sudo poweroff" ;;
+    Reboot) confirm "sudo reboot" ;;
+    Logout) confirm "sudo pkill -KILL -u $(sudo who | cut -d' ' -f1)" ;;
+esac
+
