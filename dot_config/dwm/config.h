@@ -45,9 +45,9 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34",                        NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spfm",   "-g", "144x41", "-e", "ranger",        NULL };
-const char *spcmd3[] = {TERMINAL, "-n", "spcalc", "-g", "50x20",  "-e", "bc",     "-lq", NULL };
+const char *spcmd1[] = {TERMINAL, "-n", "spterm",  "-g", "120x34",                        NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spfm",    "-g", "144x41", "-e", "ranger",        NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spcalc",  "-g", "50x20",  "-e", "bc",     "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -56,20 +56,22 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "嗢", "", "ﴣ", "ﯧ", "ﰕ", "望", "" };
+static const char *tags[] = { "", "", "", "嗢", "ﴣ", "ﯧ", "ﰕ", "望", "" };
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class                instance        title               tags mask     isfloating   monitor */
-	{ NULL,                 NULL,			"Google Chrome",	1 << 1,			0,			 -1 },
-	{ "Slack",              NULL,			NULL,		        1 << 8,			0,			 -1 },
-	{ "Zulip",              NULL,			NULL,		        1 << 8,			0,			 -1 },
-	{ NULL,		            "vlc",		    NULL,		        1 << 2,		    0,			 -1 },
-	{ NULL,		            "spterm",		NULL,		        SPTAG(0),		1,			 -1 },
-	{ NULL,		            "spfm",		    NULL,		        SPTAG(1),		1,			 -1 },
-	{ NULL,		            "spcalc",	    NULL,		        SPTAG(2),		1,			 -1 },
+	/* class                instance        title               tags mask     isfloating    isterminal   monitor */
+	{ NULL,                 NULL,			"Google Chrome",	1 << 1,			0,              0,			 -1 },
+	{ TERMCLASS,		    NULL,	        NULL,		        0,		        0,              1,			 -1 },
+	{ "Slack",              NULL,			NULL,		        1 << 8,			0,              0,			 -1 },
+	{ "Zulip",              NULL,			NULL,		        1 << 8,			0,              0,			 -1 },
+	{ NULL,		            "vlc",		    NULL,		        1 << 3,		    0,              0,			 -1 },
+	{ NULL,		            "spterm",		NULL,		        SPTAG(0),		1,              1,			 -1 },
+	{ NULL,		            "spfm",		    NULL,		        SPTAG(1),		1,              1,			 -1 },
+	{ NULL,		            "spcalc",	    NULL,		        SPTAG(2),		1,              0,			 -1 },
+	{ "Evince",		        NULL,	        NULL,		        1 << 2,		    0,              0,			 -1 },
 };
 
 /* layout(s) */
@@ -96,6 +98,7 @@ static const Layout layouts[] = {
 
 static const Taglayout taglayouts[] = {
 	/* tag		layout */
+	{ 3,		{.v = &layouts[1]} },
 	{ 9,		{.v = &layouts[1]} },
 };
 
@@ -123,8 +126,8 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 
 /* Hex strings for Swedish characters
 *   character       hex
-*   å               0xf5
-*   ä               0xf4
+*   å               0xe5
+*   ä               0xe4
 *   ö               0xf6
 */
 static Key keys[] = {
@@ -132,17 +135,21 @@ static Key keys[] = {
   /* General key settings */
 	{ MODKEY,                       XK_d,               spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,          spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_p,               spawn,          SHCMD("passmenu -c -l 10") },
 	{ MODKEY,			            XK_w,	            spawn,	        SHCMD("google-chrome-stable") },
-	{ MODKEY,			            XK_s,	            spawn,	        SHCMD("slack") },
-	{ MODKEY,			            XK_z,	            spawn,	        SHCMD("zulip") },
-	{ MODKEY,			            0xf6,               spawn,          SHCMD("dm-emoji") },
-	{ MODKEY,			            XK_m,               spawn,          SHCMD("dm-netflix") },
-	{ MODKEY,                       XK_Print,           spawn,          SHCMD("import -window root $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
-	{ 0,                            XK_Print,           spawn,          SHCMD("import $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
 	{ MODKEY,                       XK_b,               togglebar,      {0} },
     { MODKEY|ShiftMask,             XK_r,               quit,           {1} },
+
+  /* Dmenu scripts */
+	{ MODKEY,                       XK_p,               spawn,          SHCMD("passmenu -i -l 10") },
+	{ MODKEY,			            0xe4,               spawn,          SHCMD("dm-emoji") },
+	{ MODKEY,			            XK_m,               spawn,          SHCMD("dm-netflix") },
+	{ MODKEY,			            0xf6,               spawn,          SHCMD("dm-zotero-pdf") },
+	{ MODKEY,			            XK_c,               spawn,          SHCMD("dm-configs") },
 	{ MODKEY|ShiftMask,             XK_q,               spawn,          SHCMD("dm-power-button") },
+
+  /* Screenshot */
+	{ MODKEY,                       XK_Print,           spawn,          SHCMD("import -window root $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
+	{ 0,                            XK_Print,           spawn,          SHCMD("import $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
 
   /* Navigation */
 	{ MODKEY,                       XK_j,               focusstack,     {.i = +1 } },
@@ -180,7 +187,7 @@ static Key keys[] = {
 
 	{ MODKEY|ShiftMask,  			XK_Return,          togglescratch,  {.ui = 0 } },
 	{ MODKEY,            			XK_r,	            togglescratch,  {.ui = 1 } },
-	{ MODKEY,            			XK_c,	            togglescratch,  {.ui = 2 } },
+	{ MODKEY|ShiftMask,             XK_c,	            togglescratch,  {.ui = 2 } },
 
 	{ MODKEY,                       XK_t,               setlayout,      {.v = &layouts[0]} },
 	// { MODKEY|ShiftMask,             XK_t,               setlayout,      {.v = &layouts[1]} },

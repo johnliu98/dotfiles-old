@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# get all Zotero pdf files
+files="$(du -a $HOME/Zotero/storage | grep pdf | cut -d'/' -f2- | sed 's/^/\//')"
+[ "$files" = "" ] && notify-send "Program terminated." && exit 1
+
+# chose a pdf from dmenu
+choice="$(echo "$files" | sed 's/.*[[:digit:]]* - //g;s/\.pdf$//' | dmenu -i -l 10)"
+notify-send "$choice"
+[ "$choice" = "" ] && notify-send "Program terminated." && exit 1
+
+# get pdf path
+pdf="$(echo "$files" | grep "$(echo "$choice" | sed 's/ /.*/g')")"
+
+# open pdf
+evince "$pdf"

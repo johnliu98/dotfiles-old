@@ -1,0 +1,25 @@
+#!/bin/sh
+
+declare -a configs=(
+"dwm - $XDG_CONFIG_HOME/dwm/config.h"
+"st - $XDG_CONFIG_HOME/st/config.h"
+"dmenu - $XDG_CONFIG_HOME/dmenu/config.h"
+"dwmblocks - $XDG_CONFIG_HOME/dwmblocks/config.h"
+"compton - $XDG_CONFIG_HOME/compton/compton.conf"
+"dunst - $XDG_CONFIG_HOME/dunst/dunstrc"
+"dunst - $XDG_CONFIG_HOME/dunst/dunstrc"
+"neofetch - $XDG_CONFIG_HOME/neofetch/config.conf"
+"nvim - $XDG_CONFIG_HOME/nvim/lua/user/"
+"ranger - $XDG_CONFIG_HOME/ranger/rc.conf"
+"zsh - $XDG_CONFIG_HOME/zsh"
+"conky - $XDG_CONFIG_HOME/conky/conky.conf"
+)
+
+choice="$(printf "%s\n" "${configs[@]}" | sort -k 1 | dmenu -i -l 10 -p "Configurations:")"
+
+if [ "$choice" ]; then
+    configfile="$(printf "%s\n" "${choice}" | awk '{print $NF}')"
+    $TERMINAL -e $EDITOR "$configfile"
+else
+    notify-send "Program terminated." && exit 1
+fi
