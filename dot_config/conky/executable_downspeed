@@ -1,0 +1,28 @@
+#!/bin/sh
+
+now=`cat /sys/class/net/$1/statistics/rx_bytes`
+echo "`date +%s` - $now" >> /tmp/$1-keeperRX
+
+if [[ `cat /tmp/$1-keeperRX | wc -l` -lt 3 ]] ; then
+    echo 0
+    exit 0
+fi
+
+echo "$(tail -n5 /tmp/$1-keeperRX)" > /tmp/$1-keeperRX
+
+first=`head -n1 /tmp/$1-keeperRX`
+last=`tail -n1 /tmp/$1-keeperRX`
+
+firstSec=`echo $first | cut -d- -f1`
+firstBytes=`echo $first | cut -d- -f2`
+
+lastSec=`echo $last | cut -d- -f1`
+lastBytes=`echo $last | cut -d- -f2`
+
+diff=`bc <<< "( $lastBytes - $firstBytes ) / ( $lastSec - $firstSec )"`
+perc="$(echo "$diff/10000" | bc -l)"     # convert to percent of 1MiB
+if (( $(echo "$perc > 100" | bc -l) )); then
+    echo "100"
+else
+    echo "$perc"
+fi
