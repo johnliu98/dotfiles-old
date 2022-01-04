@@ -8,6 +8,7 @@ export PATH=$HOME/.local/share/go/bin:$PATH
 export GOPATH=$HOME/.local/share/go
 export PATH=$HOME/.fnm:$PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 # eval "$(fnm env)"
 # eval "$(zoxide init zsh)"
 

@@ -14,7 +14,7 @@ vim.cmd [[
 
   augroup _latex
     autocmd BufEnter *.tex :set wrap linebreak nolist
-    autocmd BufWritePost *.tex :silent !pdflatex % > /dev/null
+    autocmd BufWritePost *.tex :!pdflatex %
   augroup end
 
   augroup _suckless
