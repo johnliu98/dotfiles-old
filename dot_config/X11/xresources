@@ -1,8 +1,9 @@
 
-! --- St ---
+! Default transparency
 st.alpha: 0.9
 st.alphaOffset: 0.30
 
+! Default colors
 *.color0:  #282828
 *.color1:  #cc241d
 *.color2:  #98971a
@@ -22,10 +23,3 @@ st.alphaOffset: 0.30
 *.background: #282828
 *.foreground: #ebdbb2
 
-! --- Dwm ---
-*.normbgcolor:     #222222
-*.normbordercolor: #444444
-*.normfgcolor:     #bbbbbb
-*.selfgcolor:      #282828
-*.selbordercolor:  #005577
-*.selbgcolor:      #005577
