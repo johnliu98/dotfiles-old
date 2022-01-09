@@ -11,9 +11,10 @@ declare -a configs=(
 "neofetch - $XDG_CONFIG_HOME/neofetch/config.conf"
 "nvim - $XDG_CONFIG_HOME/nvim/lua/user/"
 "ranger - $XDG_CONFIG_HOME/ranger/rc.conf"
-"zsh - $XDG_CONFIG_HOME/zsh"
+"zsh - $XDG_CONFIG_HOME/zsh/"
 "conky - $XDG_CONFIG_HOME/conky/conky.conf"
 "zathura - $XDG_CONFIG_HOME/zathura/zathurarc"
+"X11 - $XDG_CONFIG_HOME/X11/"
 )
 
 choice="$(printf "%s\n" "${configs[@]}" | sort -k 1 | dmenu -i -l 10 -p "Configurations:")"
