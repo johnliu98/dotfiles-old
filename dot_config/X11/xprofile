@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit this file will also be sourced.
+
+# general settings
+# redshift -03500 &
+redshift -l 59.3:18.1 -t 6500:4000 &
+xset r rate 300 50 &
+$HOME/.local/bin/setbg $HOME/Pictures/wallpapers/favorites &
+compton &
+dwmblocks &

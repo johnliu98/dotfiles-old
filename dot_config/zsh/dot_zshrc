@@ -91,3 +91,6 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Load system information
 pfetch
+
+# Load color scheme
+# space-invaders

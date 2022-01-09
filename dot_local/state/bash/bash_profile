@@ -2,7 +2,7 @@
 # ~/.bash_profile
 #
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f $XDG_STATE_HOME/bash/bashrc ]] && . $XDG_STATE_HOME/bash/bashrc 
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     startx

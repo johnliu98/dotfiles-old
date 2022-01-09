@@ -18,6 +18,7 @@ alias fgrep='fgrep --color=auto'
 
 # storage
 alias df='df -h'
+alias du='du -h'
 alias free='free -h'
 
 # file maintenance 
@@ -44,4 +45,8 @@ alias gb='git branch'
 alias gr='git reset'
 alias gM='git merge'
 alias gR='git rebase'
+
+# --- Other Aliases ---
+alias cb='setbg ~/Pictures/wallpapers/favorites'
+alias gdrive='gdrive --config $XDG_DATA_HOME/gdrive'
 

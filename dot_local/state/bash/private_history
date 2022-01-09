@@ -1,0 +1,100 @@
+nvim /etc/bash.bashrc
+sudo nvim /etc/bash.bashrc
+history
+sudo nvim /etc/bash.bashrc
+bat /etc/bash.bashrc
+ls -a
+nvim .bashrc
+nvim .bash_profile
+mv .bashrc $XDG_STATE_HOME/bash/bashrc
+nvim .bash_profile
+sudo nvim /etc/bash.bashrc
+mv .bash_profile $XDG_STATE_HOME/bash/bash_profile
+ls -a
+nvim .xprofile
+echo $XAUTHORITY
+ls $XDG_RUNTIME_DIR
+nvim .xprofile
+mv .Xauthority $XDG_RUNTIME_DIR/Xauthority
+reboot
+ll
+ll
+nvim .xprofile
+mv .Xauthority $XDG_RUNTIME_DIR/Xauthority
+reboot
+nvim .xinitrc
+reboot
+nvim .xprofile
+fzf
+grep WGETRC -r .
+paru -Q | grep wget
+ll
+ra
+passmenu
+ll
+ls -a | wc -l
+rm .xprofile
+ll
+mv .Xresources .config/X11/xresources
+history
+xrdb -load ~/.config/X11/xresources
+ll
+ll
+ls $XDG_RUNTIME_DIR
+rm .Xauthority
+ll
+ll
+reboot
+ll
+ll
+cp /etc/zsh/zshenv .zshenv
+ls
+ll
+ls -a | wc -l
+ll
+sudo rm .zshenv
+mv .config/zsh/.zprofile .
+ls
+ll
+ls /etc/zsh
+cat /etc/zsh/zprofile
+sudo rm /etc/zsh/zshenv
+startx
+reboot
+ll
+xrdb -load ~/.config/X11/xresources
+xrdb -load ~/.config/X11/xresources
+neofetch
+neofetch
+ra
+ra
+cd .config/X11/
+nvim xresources
+ll
+mv notes.txt Documents
+cd Documents
+ls
+gotop
+ll
+ls -a | wc -l
+cd Documents
+ls
+cd
+ls
+ll
+neofetch
+ll
+xrdb -load ~/.config/X11/xresources
+ll
+nvim .config/X11/xresources
+setbg
+ll
+ll
+ll
+ll
+ll
+nvim ll
+ll
+ll
+pavucontrol
+pulsemixer
