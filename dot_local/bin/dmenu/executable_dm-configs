@@ -13,9 +13,11 @@ declare -a configs=(
 "ranger - $XDG_CONFIG_HOME/ranger/rc.conf"
 "zsh - $XDG_CONFIG_HOME/zsh"
 "conky - $XDG_CONFIG_HOME/conky/conky.conf"
+"zathura - $XDG_CONFIG_HOME/zathura/zathurarc"
 )
 
 choice="$(printf "%s\n" "${configs[@]}" | sort -k 1 | dmenu -i -l 10 -p "Configurations:")"
+
 
 if [ "$choice" ]; then
     configfile="$(printf "%s\n" "${choice}" | awk '{print $NF}')"

@@ -7,7 +7,7 @@
 /* appearance */
 static const unsigned int borderpx      = 0;        /* border pixel of windows */
 static const unsigned int snap          = 0;        /* snap pixel */
-static const unsigned int cornerrad     = 25;       /* corner radius */
+static const unsigned int cornerrad     = 15;       /* corner radius */
 static const unsigned int gappih        = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv        = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh        = 10;       /* horiz outer gap between windows and screen edge */
@@ -17,23 +17,23 @@ static const int showbar                = 1;        /* 0 means no bar */
 static const int topbar                 = 1;        /* 0 means bottom bar */
 static char      *fonts[]               = { "UbuntuMono Nerd Font:size=20" };
 static const char dmenufont[]           = "UbuntuMono Nerd Font:size=20";
-static const char col_gray1[]           = "#222222";
-static const char col_gray2[]           = "#444444";
-static const char col_gray3[]           = "#bbbbbb";
-static const char col_gray4[]           = "#eeeeee";
-static const char col_cyan[]            = "#005577";
-static const char col_white[]           = "#bbbbbb" ;
-static const unsigned int baralpha      = 0xaa;
-static const unsigned int borderalpha   = OPAQUE;
+static char normbgcolor[]               = "#222222";
+static char normbordercolor[]           = "#444444";
+static char normfgcolor[]               = "#bbbbbb";
+static char selfgcolor[]                = "#eeeeee";
+static char selbordercolor[]            = "#005577";
+static char selbgcolor[]                = "#005577";
+static const unsigned int baralpha      = 0xe0;
+static const unsigned int borderalpha   = 0x99;
 static const float mfact                = 0.5;      /* factor of master area size [0.05..0.95] */
 static const int nmaster                = 1;        /* number of clients in master area */
 static const int resizehints            = 0;        /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen         = 1;        /* 1 will force focus on the fullscreen window */
 
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_white  },
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
@@ -46,13 +46,11 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {TERMINAL, "-n", "spterm",  "-g", "120x34",                        NULL };
-const char *spcmd2[] = {TERMINAL, "-n", "spfm",    "-g", "144x41", "-e", "ranger",        NULL };
-const char *spcmd3[] = {TERMINAL, "-n", "spcalc",  "-g", "50x20",  "-e", "bc",     "-lq", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spcalc",  "-g", "50x20",  "-e", "bc",     "-lq", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
-	{"spcalc",      spcmd3},
+	{"spcalc",      spcmd2},
 };
 
 /* tagging */
@@ -69,9 +67,8 @@ static const Rule rules[] = {
 	{ "Zulip",              NULL,			NULL,		        1 << 8,			0,              0,			 -1 },
 	{ NULL,		            "vlc",		    NULL,		        1 << 3,		    0,              0,			 -1 },
 	{ NULL,		            "spterm",		NULL,		        SPTAG(0),		1,              1,			 -1 },
-	{ NULL,		            "spfm",		    NULL,		        SPTAG(1),		1,              1,			 -1 },
-	{ NULL,		            "spcalc",	    NULL,		        SPTAG(2),		1,              0,			 -1 },
-	{ "Evince",		        NULL,	        NULL,		        1 << 2,		    0,              0,			 -1 },
+	{ NULL,		            "spcalc",	    NULL,		        SPTAG(1),		1,              0,			 -1 },
+	{ "Zathura",		    NULL,	        NULL,		        1 << 2,		    0,              0,			 -1 },
 };
 
 /* layout(s) */
@@ -117,7 +114,7 @@ static const Taglayout taglayouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 
 #include <X11/XF86keysym.h>
@@ -135,12 +132,15 @@ static Key keys[] = {
   /* General key settings */
 	{ MODKEY,                       XK_d,               spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,          spawn,          {.v = termcmd } },
+	{ MODKEY,            			XK_r,	            spawn,          SHCMD("$TERMINAL -e ranger") },
 	{ MODKEY,			            XK_w,	            spawn,	        SHCMD("google-chrome-stable") },
-	{ MODKEY,                       XK_b,               togglebar,      {0} },
+	{ MODKEY,			            XK_n,	            spawn,	        SHCMD("$TERMINAL -e $EDITOR ~/Documents/notes.txt") },
+	{ MODKEY,			            XK_b,	            spawn,	        SHCMD("~/.local/bin/setbg ~/Pictures/wallpapers/favorites/") },
+	{ MODKEY|ShiftMask,             XK_b,               togglebar,      {0} },
     { MODKEY|ShiftMask,             XK_r,               quit,           {1} },
 
   /* Dmenu scripts */
-	{ MODKEY,                       XK_p,               spawn,          SHCMD("passmenu -i -l 10") },
+	{ MODKEY,                       XK_p,               spawn,          SHCMD("passmenu -i -l 10 && notify-send 'Password copied'") },
 	{ MODKEY,			            0xe4,               spawn,          SHCMD("dm-emoji") },
 	{ MODKEY,			            XK_m,               spawn,          SHCMD("dm-netflix") },
 	{ MODKEY,			            0xf6,               spawn,          SHCMD("dm-zotero-pdf") },
@@ -163,6 +163,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period,          focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,           tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,          tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_F5,              xrdb,           {.v = NULL } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -186,8 +187,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,               killclient,     {0} },
 
 	{ MODKEY|ShiftMask,  			XK_Return,          togglescratch,  {.ui = 0 } },
-	{ MODKEY,            			XK_r,	            togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,             XK_c,	            togglescratch,  {.ui = 2 } },
+	{ MODKEY|ShiftMask,             XK_c,	            togglescratch,  {.ui = 1 } },
 
 	{ MODKEY,                       XK_t,               setlayout,      {.v = &layouts[0]} },
 	// { MODKEY|ShiftMask,             XK_t,               setlayout,      {.v = &layouts[1]} },

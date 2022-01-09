@@ -28,7 +28,10 @@ for battery in /sys/class/power_supply/BAT?*; do
             4[0-9])         status=" " ;;
             3[0-9])         status=" " ;;
             2[0-9])         status=" " ;;
-            *)              status=" " ;;
+            *)              status=" "
+                            if [ "$capacity" -le 10 ]; then
+                                notify-send "Low battery $capacity%"
+                            fi ;;
         esac ;;
 		"Charging")
         case "$capacity" in
