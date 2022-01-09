@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Set log file depending on upload or download rate
+case $1 in
+    up)   mode="tx_bytes" ;;
+    down) mode="rx_bytes" ;;
+    *)    exit;;
+esac
+logfile="/tmp/$mode"
+[ -f $logfile ] || touch $logfile
+
+# Append accumulated bytes to logfile
+now="$(($(cat /sys/class/net/w*/statistics/$mode | paste -sd '+')))"
+echo "$now $(date +%s)" >> $logfile
+
+# If logfile contains at least 3 lines, redirect last three lines to logfile
+[ "$(cat /tmp/$mode | wc -l)" -lt 3 ] && exit
+echo "$(tail -n3 /tmp/$mode)" > /tmp/$mode
+
+# Extract first and last line from line from logfile
+first="$(head -n1 /tmp/$mode)"
+last="$(tail -n1 /tmp/$mode)"
+
+# Network rate in B/s
+rate="$(echo "( ${last%% *} - ${first%% *} ) / ( ${last##* } - ${first##* } )" | bc -l)"
+
+case $1 in
+    # Convert to KiB/s (percent of 100KiB/s) if up
+    up)   perc="$(echo "1000 / 1048576 * $rate" | bc -l)" ;;
+    # Convert to 10KiB/s (percent of MiB/s) if down
+    down) perc="$(echo "100 / 1048576   * $rate" | bc -l)" ;;
+esac
+
+if (( $(echo "$perc > 100" | bc -l) )); then
+    echo "100"
+else
+    echo "$perc"
+fi
