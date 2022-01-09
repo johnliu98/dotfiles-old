@@ -1,0 +1,8 @@
+#!/bin/sh
+
+filename="$(grep -wo '\S\+\.png' <<< $@)"
+[ -z $filename ] && filename="$(date +'%Y-%m-%d_%H-%M-%S.png')"
+echo $filename
+
+maim ${@%"$filename"} $HOME/Pictures/screenshots/$filename &&
+    notify-send "Screenshot" "$filename"

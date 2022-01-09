@@ -148,8 +148,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,               spawn,          SHCMD("dm-power-button") },
 
   /* Screenshot */
-	{ MODKEY,                       XK_Print,           spawn,          SHCMD("import -window root $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
-	{ 0,                            XK_Print,           spawn,          SHCMD("import $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H-%M-%S.png')") },
+	{ 0,                            XK_Print,           spawn,          SHCMD("dm-screenshot") },
+	{ ShiftMask,                    XK_Print,           spawn,          SHCMD("dm-screenshot -s") },
 
   /* Navigation */
 	{ MODKEY,                       XK_j,               focusstack,     {.i = +1 } },
