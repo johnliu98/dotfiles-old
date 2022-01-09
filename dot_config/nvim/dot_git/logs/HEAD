@@ -22,3 +22,6 @@ b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 b9a2bc855bbd7a7d54c9e280ee875393e30cf1a
 b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 John Liu <johnliu@kth.se> 1640891529 +0100	reset: moving to HEAD
 b9a2bc855bbd7a7d54c9e280ee875393e30cf1a6 8cebbf6b111b664aecf8a29039c483ae4db5afe7 John Liu <johnliu@kth.se> 1640891538 +0100	checkout: moving from 09-autopairs to master
 8cebbf6b111b664aecf8a29039c483ae4db5afe7 7a082a3306b27d59257ce9bc826ab4dc64f69854 John Liu <johnliu@kth.se> 1640891976 +0100	pull: Fast-forward
+7a082a3306b27d59257ce9bc826ab4dc64f69854 7a082a3306b27d59257ce9bc826ab4dc64f69854 John Liu <johnliu@kth.se> 1641474864 +0100	reset: moving to HEAD
+7a082a3306b27d59257ce9bc826ab4dc64f69854 8309138032f1bcd6eeb9586994994696f4786204 John Liu <johnliu@kth.se> 1641474881 +0100	checkout: moving from master to 14-null-ls
+8309138032f1bcd6eeb9586994994696f4786204 7a082a3306b27d59257ce9bc826ab4dc64f69854 John Liu <johnliu@kth.se> 1641474908 +0100	checkout: moving from 14-null-ls to master

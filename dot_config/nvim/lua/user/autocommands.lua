@@ -7,9 +7,8 @@ vim.cmd [[
     autocmd FileType qf set nobuflisted
   augroup end
 
-  augroup _textfile
+  augroup _text
     autocmd BufEnter *.txt :set wrap linebreak nolist
-    autocmd BufEnter *.txt :setlocal spell spelllang=en_us
   augroup end
 
   augroup _latex
@@ -19,6 +18,10 @@ vim.cmd [[
 
   augroup _suckless
     autocmd BufWritePost config.h :!sudo make install
+  augroup end
+
+  augroup _resrouces
+    autocmd BufWritePost ~/.Xresources :silent !xrdb %
   augroup end
 
   augroup _git

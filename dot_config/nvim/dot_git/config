@@ -36,3 +36,6 @@
 [branch "09-autopairs"]
 	remote = origin
 	merge = refs/heads/09-autopairs
+[branch "14-null-ls"]
+	remote = origin
+	merge = refs/heads/14-null-ls
