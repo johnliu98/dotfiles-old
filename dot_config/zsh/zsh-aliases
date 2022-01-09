@@ -32,6 +32,10 @@ alias tls='trash-list | sort -k 1'
 # ranger
 alias ra=". ranger"
 
+# fuzzy finder
+alias fn="fzf | xargs -I {} nvim {}"
+alias fh="history 0 | tac | fzf | sed 's/.*[[:digit:]][[:space:]]\+//' | xargs -I {} xdotool type {}"
+
 # --- Git Aliases ---
 alias ga='git add'
 alias gC='git commit'
