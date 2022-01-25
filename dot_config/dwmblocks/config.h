@@ -8,6 +8,7 @@ static const Block blocks[] = {
 	{"",    "sb-battery",            1,		 7},
 	{"",    "sb-date",              60,		 2},
 	// {"",    "sb-time",               2,		 1},
+	{"",    "sb-bluetooth",          2,		11},
 	{"",    "sb-volume",             0,		10},
 	// {"",    "sb-help-icon",          0,		15},
 };
