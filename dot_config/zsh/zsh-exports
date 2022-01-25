@@ -6,30 +6,29 @@ SAVEHIST=1000000
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
-# add path to zsh config
+# Add path to zsh config
 export ZDOTDIR="$HOME/.config/zsh"
 
-# default programs
+# Software variables
 export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="google-chrome-stable"
 
-# Export to PATH
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.local/share/go/bin:$PATH"
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
-
-# add xdg paths
+# Add xdg paths
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# add paths for X
+# Export to PATH
+export PATH="$XDG_DATA_HOME/cargo/bin:$PATH"
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+
+# Add paths for X
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 # export XSERVERRC="$XDG_CONFIG_HOME/X11/xserverrc"
 
-# clean up home directory
+# Clean up home directory
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
@@ -38,16 +37,28 @@ export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 export GVIMINIT='let $MYGVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/gvimrc" : "$XDG_CONFIG_HOME/nvim/init.lua" | so $MYGVIMRC'
 export VIMINIT='let $MYVIMRC = !has("nvim") ? "$XDG_CONFIG_HOME/vim/vimrc" : "$XDG_CONFIG_HOME/nvim/init.lua" | so $MYVIMRC'
-
-# Export go path
 export GOPATH="$HOME/.local/share/go"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export STARSHIP_CACHE="$HOME/.cache/starhip"
+export IPYTHONDIR="$XDG_CONFIG_HOME/jupyter"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 
-# Default options for `fzf`
-export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
-export FZF_DEFAULT_COMMAND="find ."
+# Export gpg tty
+export GPG_TTY=$(tty)
 
-# eval "$(fnm env)"
-# eval "$(zoxide init zsh)"
+# For QT Themes
+export QT_QPA_PLATFORMTHEME=qt5ct
 
-# set starship prompt
+# Enable miniconda
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+# Better node manager
+eval "$(fnm env)"
+
+# Visited directory heuristic
+eval "$(zoxide init zsh)"
+
+# Set starship prompt
 eval "$(starship init zsh)"

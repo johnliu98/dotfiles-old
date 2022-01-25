@@ -32,9 +32,15 @@ alias tls='trash-list | sort -k 1'
 # ranger
 alias ra=". ranger"
 
-# fuzzy finder
-alias fn="fzf | xargs -I {} nvim {}"
-alias fh="history 0 | tac | fzf | sed 's/.*[[:digit:]][[:space:]]\+//' | xargs -I {} xdotool type {}"
+# miniconda
+alias ca="conda activate"
+alias cda="conda deactivate"
+
+# neovim
+alias v="nvim"
+
+# python
+alias p="python"
 
 # --- Git Aliases ---
 alias ga='git add'
@@ -51,6 +57,36 @@ alias gM='git merge'
 alias gR='git rebase'
 
 # --- Other Aliases ---
-alias cb='setbg ~/Pictures/wallpapers/favorites'
 alias gdrive='gdrive --config $XDG_DATA_HOME/gdrive'
 
+# --- Shortcuts for system paths ---
+bindkey -s 'gh' '/home/john^M'
+bindkey -s 'gcf' '/home/john/.config^M'
+bindkey -s 'gca' '/home/john/.cache^M'
+bindkey -s 'gbi' '/home/john/.local/bin^M'
+bindkey -s 'gsh' '/home/john/.local/share^M'
+bindkey -s 'gdo' '/home/john/Documents^M'
+bindkey -s 'gdl' '/home/john/Downloads^M'
+bindkey -s 'gpi' '/home/john/Pictures^M'
+bindkey -s 'gcco' '/home/john/.config/compton^M'
+bindkey -s 'gccn' '/home/john/.config/conky^M'
+bindkey -s 'gcdm' '/home/john/.config/dmenu^M'
+bindkey -s 'gcdu' '/home/john/.config/dunst^M'
+bindkey -s 'gcdw' '/home/john/.config/dwm^M'
+bindkey -s 'gcdb' '/home/john/.config/dwmblocks^M'
+bindkey -s 'gcnv' '/home/john/.config/nvim^M'
+bindkey -s 'gcra' '/home/john/.config/ranger^M'
+bindkey -s 'gcst' '/home/john/.config/st^M'
+bindkey -s 'gcxo' '/home/john/.config/X11^M'
+bindkey -s 'gcza' '/home/john/.config/zathura^M'
+bindkey -s 'gczs' '/home/john/.config/zsh^M'
+bindkey -s 'gbco' '/home/john/.local/bin/color-scripts^M'
+bindkey -s 'gbdm' '/home/john/.local/bin/dmenu^M'
+bindkey -s 'gbst' '/home/john/.local/bin/statusbar^M'
+bindkey -s 'gsdw' '/home/john/.local/share/dwm^M'
+bindkey -s 'gdkk' '/home/john/Documents/ktk-kassör^M'
+bindkey -s 'gdmt' '/home/john/Documents/master-thesis^M'
+bindkey -s 'gpas' '/home/john/Pictures/ascii^M'
+bindkey -s 'gpsc' '/home/john/Pictures/screenshots^M'
+bindkey -s 'gpwa' '/home/john/Pictures/wallpapers^M'
+bindkey -s 'gpwf' '/home/john/Pictures/wallpapers/favorites/^M'

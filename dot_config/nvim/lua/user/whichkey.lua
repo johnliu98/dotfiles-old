@@ -126,7 +126,7 @@ local mappings = {
       "<cmd>Gitsigns diffthis HEAD<cr>",
       "Diff",
     },
-  },
+ },
 
   l = {
     name = "LSP",

@@ -1,0 +1,47 @@
+# Shortcuts for system paths
+# Format: alias path
+# This file is used when setting system paths
+# when running $HOME/.local/bin/setsystempaths.
+
+# Main paths
+h $HOME
+cf ${XDG_CONFIG_HOME:-$HOME/.config}
+ca ${XDG_CACHE_HOME:-$HOME/.cache}
+bi $HOME/.local/bin
+sh ${XDG_DATA_HOME:-$HOME/.local/share}
+do $HOME/Documents
+dl $HOME/Downloads
+pi $HOME/Pictures
+
+# Config paths
+cco ${XDG_CONFIG_HOME:-$HOME/.config}/compton
+ccn ${XDG_CONFIG_HOME:-$HOME/.config}/conky
+cdm ${XDG_CONFIG_HOME:-$HOME/.config}/dmenu
+cdu ${XDG_CONFIG_HOME:-$HOME/.config}/dunst
+cdw ${XDG_CONFIG_HOME:-$HOME/.config}/dwm
+cdb ${XDG_CONFIG_HOME:-$HOME/.config}/dwmblocks
+cnv ${XDG_CONFIG_HOME:-$HOME/.config}/nvim
+cra ${XDG_CONFIG_HOME:-$HOME/.config}/ranger
+cst ${XDG_CONFIG_HOME:-$HOME/.config}/st
+cxo ${XDG_CONFIG_HOME:-$HOME/.config}/X11
+cza ${XDG_CONFIG_HOME:-$HOME/.config}/zathura
+czs ${XDG_CONFIG_HOME:-$HOME/.config}/zsh
+
+# Local executable paths
+bco $HOME/.local/bin/color-scripts
+bdm $HOME/.local/bin/dmenu
+bst $HOME/.local/bin/statusbar
+
+# Local data paths
+sdw ${XDG_DATA_HOME:-$HOME/.local/share}/dwm
+
+# Document paths
+dkk $HOME/Documents/ktk-kassör
+dmt $HOME/Documents/master-thesis
+
+# Picture paths
+pas $HOME/Pictures/ascii
+psc $HOME/Pictures/screenshots
+pwa $HOME/Pictures/wallpapers
+pwf $HOME/Pictures/wallpapers/favorites/
+

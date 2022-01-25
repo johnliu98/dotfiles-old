@@ -1,5 +1,5 @@
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=30
 
 # Use vim keys in tab complete menu:
 bindkey -M menuselect '^h' vi-backward-char

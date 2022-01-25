@@ -45,46 +45,50 @@ zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
 
-# Key-bindings
-bindkey -s '^o' 'ranger^M'
-bindkey -s '^f' 'zi^M'
-bindkey -s '^s' 'ncdu^M'
-# bindkey -s '^n' 'nvim $(fzf)^M'
-# bindkey -s '^v' 'nvim\n'
-bindkey -s '^z' 'zi^M'
-bindkey '^[[P' delete-char
-bindkey "^p" up-line-or-beginning-search # Up
-bindkey "^n" down-line-or-beginning-search # Down
-bindkey "^k" up-line-or-beginning-search # Up
-bindkey "^j" down-line-or-beginning-search # Down
-bindkey -r "^u"
-bindkey -r "^d"
-
 # FZF 
-# TODO update for mac
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f $ZDOTDIR/completion/_fnm ] && fpath+="$ZDOTDIR/completion/"
-# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
+export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+export FZF_DEFAULT_COMMAND="find . -type f"
+
 compinit
+
+# Unbind keys
+bindkey -r "^u"
+bindkey -r "^d"
+bindkey -r "^[,"
+bindkey -r "^[/"
+bindkey -r "^[OA"
+bindkey -r "^[OB"
+bindkey -r "^[OC"
+bindkey -r "^[OD"
+bindkey -r "^[[A"
+bindkey -r "^[[B"
+bindkey -r "^[[C"
+bindkey -r "^[[D"
+bindkey -r "^[[P"
+bindkey -r "^[c"
+bindkey -r "^[~"
+
+# Key-bindings
+bindkey -s '^r' '. ranger^M'
+bindkey -s '^f' 'zi^M'
+bindkey -s '^s' 'ncdu^M'
+bindkey -s '^v' 'fzf | xargs -r nvim^M'
+bindkey "^p" up-line-or-beginning-search # Up
+bindkey "^n" down-line-or-beginning-search # Down
+bindkey "^k" up-line-or-beginning-search # Up
+bindkey "^j" down-line-or-beginning-search # Down
+bindkey "^h" fzf-history-widget
+bindkey '^[[P' delete-char
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-# bindkey '^e' edit-command-line
-
-# Software variables
-export EDITOR="nvim"
-export TERMINAL="st"
-export BROWSER="google-chrome-stable"
-
-GPG_TTY=$(tty)
-export GPG_TTY
-
-# For QT Themes
-export QT_QPA_PLATFORMTHEME=qt5ct
+bindkey '^e' edit-command-line
 
 # Load system information with random ascii art
 # shuf -n 1 $ZDOTDIR/fm6000-commands.txt | sh
@@ -94,3 +98,20 @@ pfetch
 
 # Load color scheme
 # space-invaders
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/john/.config/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/john/.config/conda/etc/profile.d/conda.sh" ]; then
+        . "/home/john/.config/conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/john/.config/conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
