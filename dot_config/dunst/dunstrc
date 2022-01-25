@@ -24,10 +24,10 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = (0, 2000)
+    width = (0, 600)
 
     # The maximum height of a single notification, excluding the frame.
-    height = 1000
+    height = 500
 
     # Position the notification in the top right corner
     origin = top-right
@@ -202,7 +202,7 @@
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.
-    sticky_history = yes
+    sticky_history = no
 
     # Maximum amount of notifications kept in history
     history_length = 20
