@@ -1,0 +1,16 @@
+#!/bin/sh
+
+case $BUTTON in
+	1) setsid -f "$TERMINAL" -e pulsemixer ;;
+	3) notify-send "🔵🦷 Bluetooth" "\n 🎧 if connected" ;;
+	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+connected="$(bluetoothctl devices |
+    cut -f2 -d' ' |
+    while read uuid; do bluetoothctl info $uuid; done |
+        awk '/Connected:/{print $2}')"
+
+if [ $connected = "yes" ]; then
+    echo ""
+fi

@@ -5,7 +5,7 @@ files="$(find $HOME/Zotero/storage -name \*pdf)"
 [ "$files" = "" ] && notify-send "No Zotero pdf. Program terminated." && exit 1
 
 # chose a pdf from dmenu
-choice="$(echo "$files" | sed 's/.*[[:digit:]]* - //g ; s/\.pdf$//' | dmenu -i -l 10)"
+choice="$(echo "$files" | sed 's|.*/||; s|\.pdf||' | sort | dmenu -i -l 20)"
 [ "$choice" = "" ] && notify-send "No pdf selected. Program terminated." && exit 1
 notify-send "$choice"
 

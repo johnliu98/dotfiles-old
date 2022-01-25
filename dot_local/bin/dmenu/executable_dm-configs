@@ -9,7 +9,7 @@ declare -a configs=(
 "dunst - $XDG_CONFIG_HOME/dunst/dunstrc"
 "dunst - $XDG_CONFIG_HOME/dunst/dunstrc"
 "neofetch - $XDG_CONFIG_HOME/neofetch/config.conf"
-"nvim - $XDG_CONFIG_HOME/nvim/lua/user/"
+"nvim - $XDG_CONFIG_HOME/nvim/init.lua"
 "ranger - $XDG_CONFIG_HOME/ranger/rc.conf"
 "zsh - $XDG_CONFIG_HOME/zsh/"
 "conky - $XDG_CONFIG_HOME/conky/conky.conf"
@@ -19,10 +19,9 @@ declare -a configs=(
 
 choice="$(printf "%s\n" "${configs[@]}" | sort -k 1 | dmenu -i -l 10 -p "Configurations:")"
 
-
 if [ "$choice" ]; then
-    configfile="$(printf "%s\n" "${choice}" | awk '{print $NF}')"
-    $TERMINAL -e $EDITOR "$configfile"
+    config_file="$(printf "%s\n" "${choice}" | awk '{print $NF}')"
+    $TERMINAL -e $EDITOR "$config_file"
 else
     notify-send "Program terminated." && exit 1
 fi

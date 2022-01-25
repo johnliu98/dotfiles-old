@@ -98,3 +98,583 @@ ll
 ll
 pavucontrol
 pulsemixer
+chezmoi cd
+ls
+gs
+ls
+gs
+gd
+ls
+gs
+gs
+gs
+gd dot_local/
+ls
+cd dot_local
+ls
+gs
+ls
+ls -a
+bat .zprofile
+chezmoi add .zprofile
+chezmoi add .local/state/bash
+ls
+cd .local/share/dwm
+ls
+chezmoi add .
+cd
+ll
+cd .local/bin
+ls
+chezmoi add color-scripts statusbar dmenu setbg
+bat black
+cd
+chezmoi c
+chezmoi cd
+ll
+ls
+cd .config
+ls
+ls chezmoi
+cd chezmoi
+nvim chezmoistate.boltdb
+cd ..
+ls
+nvim compton/compton.conf
+chezmoi add compton conky dmenu dunst dwm dwmblocks nvim ranger X11 zathura st zsh
+chezmoi cd
+ls
+gs
+gs
+gs
+cd dot_config/zsh
+gs .
+gd .
+chezmoi cd
+gs
+ls
+cd .dot
+cd dot
+cd dot_config
+ls
+ls
+gs
+cd
+gs
+chezmoi cd
+xrdb -load ~/.config/X11/xresources
+chezmoi cd
+ls
+gs
+gp
+gP
+gl
+cd
+gs
+gs
+cd dot_config
+gs
+gs .
+cd dmenu
+ls
+rm *.orig
+ls
+g s.
+gs  .
+gd .
+gc -- .
+gs .
+cd ..
+gs .
+gc -- compton/
+gd conky
+gs
+ga conky
+gs
+ls
+gd --cached
+gC -m "fix(conky): download and upload rate"
+gs
+ga nvim
+gs
+git reset
+cd nvim
+gs .
+gd init.lua
+ga .
+gs
+cd ..
+ga nvim
+gs
+gC -m "feat(nvim): add colorizer"
+gs
+gd st
+gc -- st
+gs
+gd ranger/
+ga ranger/
+gs
+gC -m "feat(ranger): add path aliases"
+gs
+gd dwmblocks/
+ga dwmblocks/
+gs
+gC -m "chore(dwmblocks): restructure status bar"
+gs
+gd dwm/config.h
+gs
+ga dwm
+gs
+git reset
+gs
+ga dunst/
+gC -m "feat(dunst): initial commit"
+gs
+ga zathura/
+gs
+gC -m "feat(zathura): initial commit"
+gs
+ga dwm
+cd ..
+gs
+ga dot_local/bin/
+gs
+gC -m "chore(dwm): integrate with Xresources"
+gs
+ga dot_local/share/dwm/
+gs
+gC --amend --no-edit
+gs
+gl
+gl
+gs
+gd dot_config/zsh/zsh-aliases
+ga .
+gs
+gC -m "chore: spring cleaning at home"
+cd
+ls
+ll
+cd
+chezmoi cd
+paru -Qdt
+setbg
+neofetch
+xprop | awk '\
+	/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}\
+	/^WM_NAME/{sub(/.* =/, "title:"); print}'
+neofetch
+neofetch
+neofetch
+neofetch
+ll
+ra
+paru -Q | grep import
+which import
+nvim /usr/bin/import
+paru -Q | grep image
+paru -Rns imagemagick
+paru -S maim
+pfetch
+man maim
+man maim
+cd Pictures/screenshots
+ls
+maim
+maim test.png
+ls
+ra
+ra
+rm *
+ls
+maim -s test.png
+ra
+ra
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+cd
+cd Pictures/screenshots
+ls
+ls
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+ranger
+dm-screenshot
+dm-screenshot
+ll
+dm-screenshot
+notify-send "Hello"
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+ll
+rm *
+cd Pictures/screenshots
+dm-screenshot
+dm-screenshot -s
+dm-screenshot -s
+ll
+man maim
+which main
+which maim
+nvim /usr/bin/maim
+cd /etc/binfmt.d
+cd /usr/bin
+ls
+file *
+file *
+file * | grep POSIX
+file * | grep shell
+file * | grep POSIX
+file * | grep POSIX
+nvim egrep
+nvim startx
+which sed
+nvim sed
+nvim grep
+cd
+cd Pictures/screenshots
+rm *
+ll
+rm "\-s"
+rm "-s"
+rm 2022-01-09_14-26-09.png
+rm -s
+ra
+rm -f -s
+rm -f "-s"
+rm -f \-s
+rm --s
+ra
+ls
+ll
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+ll
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+dm-screenshot
+ll
+ll
+dm-screenshot
+rm *
+ll
+ll
+dm-screenshot
+rm *
+dm-screenshot -s -t -e
+dm-screenshot -s -t -e
+nvim /usr/bin/find
+cd /usr/bin
+file
+file * | grep shell
+file * | grep shell
+nvim import
+nvim startx
+nvim passmenu
+man grep
+prefix=${PASSWORD_STORE_DIR-~/.password-store}\
+
+echo $prefix
+echo $prefix
+password_files=( "$prefix"/**/*.gpg )\
+
+echo $password_files
+echo "$password_files"
+password_files=( "${password_files[@]#"$prefix"/}" )\
+
+password_files=( "${password_files[@]#"$prefix"/}" )\
+
+echo "$password_files"
+password_files=( "${password_files[@]%.gpg}" )\
+
+echo "$password_files"
+echo "${password_files[@]}"
+echo "${password_files[1]}"
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+ranger
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+man miam
+man maim
+nvim /usr/bin/maim
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t test.png
+man grep
+man grep
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+cd Pictures/screenshots
+ll
+rm *
+ll
+man grep
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+grep png <<< "test.png"
+grep .png <<< "test.png"
+grep \S.png <<< "test.png"
+grep "\S.png" <<< "test.png"
+grep "\S+.png" <<< "test.png"
+grep "[\S]+.png" <<< "test.png"
+grep "\S.png" <<< "test.png"
+grep "\S\S.png" <<< "test.png"
+grep '\S\S.png' <<< "test.png"
+grep '[\S].png' <<< "test.png"
+grep '[\S]*.png' <<< "test.png"
+grep '\[\S\]*.png' <<< "test.png"
+grep '\[\S\].png' <<< "test.png"
+grep '[\S]*.png' <<< "test.png"
+grep '\S*.png' <<< "test.png"
+grep '\S+.png' <<< "test.png"
+grep '\S\+.png' <<< "test.png"
+grep -w '\S\+.png' <<< "test.png"
+grep -w '\S\+.png' <<< "-s -t test.png"
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+grep -w '\S\+\.png' <<< "-s -t test.png"
+grep -o '\S\+\.png' <<< "-s -t test.png"
+grep -o '\S\+\.png' <<< "-s -t test.png"
+grep -o '.' <<< "-s -t test.png"
+grep -o '\.' <<< "-s -t test.png"
+dm-screenshot -s -t test.png
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+grep -vo '\.' <<< "-s -t test.png"
+grep -vo '\S\+\.png' <<< "-s -t test.png"
+grep -v '\S\+\.png' <<< "-s -t test.png"
+grep -v 'png' <<< "-s -t test.png"
+grep -vo 'png' <<< "-s -t test.png"
+printf "%s\n" "-s -t test.png"
+man grep
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+dm-screenshot -s -t test.png
+ll
+rm *
+ll
+ra
+ll
+rm *
+dm-screenshot -s -t test.png
+dm-screenshot -s test.png
+dm-screenshot -s test.png
+ls
+ls
+dm-screenshot -s test.png
+ls
+dm-screenshot -s test.png
+ra
+dm-screenshot -s test.png
+ra
+dm-screenshot -s test.png
+dm-screenshot -s test.png
+ra
+cd Pictures/screenshots
+rm *
+ls
+man zparsopts
+man zparseopts
+zparseopts
+man zparseopts
+zparseopts --help
+zparseopts -h
+zparseopts -D -E -- f+:=files -files+:=files
+echo $files
+cd Pictures/screenshots
+ll
+rm *
+ll
+ll
+ll
+ll
+rm *
+ra
+git clone git@github.com:LukeSmithxyz/voidrice.git
+cd voidrice/.local/bin
+ls
+nvim dmenupass
+grep @ .
+grep -r .
+grep -r @ .
+grep -r \$@ .
+nvim transadd
+cd Pictures/screenshots
+ls
+ls
+ra
+ra
+rm *
+ll
+neofetch
+ls
+ll
+chezmoi add .zprofile
+cd .local/bin
+ls
+chezmoi add color-scripts statusbar dmenu setbg
+cd ~/.config
+chezmoi add compton conky dmenu dunst dwm dwmblocks nvim ranger st X11 zathura zsh
+cd compton
+ls
+cd ../dmenu
+ls
+rm *.orig
+cd .config/X11
+nvim xresources
+chezmoi cd
+gs
+cd dot_config
+ls
+ll
+gs
+cd compton
+ls
+cd ..
+gs
+rm dmenu/*orig
+gs
+gs
+ls compton
+gd st
+gd st
+gs
+gd st
+gs
+ga st compton
+gs
+gs
+gC -m "fix(st): increase font size"
+gs
+gd dwm/config.h
+ga .
+gs
+cd ..
+ga .
+gs
+gC -m "feat(dwm): use maim to take screenshots"
+gs
+gl
+gl
+git log
+gl
+gl
+gP
+ls
+rm dot*
+ll
+rm executable_dot_fehbg
+gs
+gc -- .
+gs
+ls
+rm dot_x*
+ls
+rm dot_b*
+ls
+rm executable_dot_fehbg
+gs
+ls
+ls dot_config/X11
+lg
+lg
+gl
+ls
+ga .
+gs
+ga *
+gs
+gs
+ga dot*
+gs
+gC --amend --no-edit
+gs
+gP -f
+gl
+ls
+ls dot_local
+cd bin
+cd dot_local/bin
+ls
+gs
+chezmoi cd
+chezmoi add .config/st
+setbg
+xrdb -load ~/.config/X11/xresources
+xrandr
+man xrandr
+xrandr -q
+xrandr -s 3840x2400
+xrandr
+man xrandr
+xrandr
+setbt
+setbg
+cd .config/zsh
+ls
+bat history
+cat history
+history
+ll
+nvim zsh-exports
+history
+histchars

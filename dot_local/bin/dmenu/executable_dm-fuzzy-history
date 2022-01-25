@@ -1,0 +1,4 @@
+#!/bin/sh
+
+awk '!x[$0]++' $HISTFILE | tac | fzf | sh
+

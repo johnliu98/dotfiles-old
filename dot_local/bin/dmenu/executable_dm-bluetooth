@@ -1,0 +1,23 @@
+#!/bin/sh
+
+bluetoothctl power on
+wait ${!}
+
+# check if already connected
+[ "$(bluetoothctl devices | cut -f2 -d' ' |
+    while read uuid; do bluetoothctl info $uuid; done |
+    awk '/Connected:/{print $2}')" = "yes" ] &&
+    notify-send "Already connected" &&
+    exit
+
+# connect via bluetooth
+uuid="$(bluetoothctl devices | cut -d' ' -f2)"
+isconnected="$(bluetoothctl connect $uuid | awk '/Connected/{print $NF}')"
+wait ${!}
+
+# notify status
+if [ $isconnected = "yes" ]; then
+    notify-send "Connected to bluetooth headphones"
+else
+    notify-send "Unable to connect"
+fi

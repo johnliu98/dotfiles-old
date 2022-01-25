@@ -1,0 +1,8 @@
+#!/bin/sh
+
+xrandr --output eDP1 --off
+xrandr --output DP3 --mode "2560x1440"
+setbg
+killall conky
+conky --config=$XDG_CONFIG_HOME/conky/conky.conf &
+conky --config=$XDG_CONFIG_HOME/conky/clock.conf
