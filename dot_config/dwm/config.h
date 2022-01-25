@@ -7,7 +7,7 @@
 /* appearance */
 static const unsigned int borderpx      = 0;        /* border pixel of windows */
 static const unsigned int snap          = 0;        /* snap pixel */
-static const unsigned int cornerrad     = 15;       /* corner radius */
+static const unsigned int cornerrad     = 30;       /* corner radius */
 static const unsigned int gappih        = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv        = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh        = 10;       /* horiz outer gap between windows and screen edge */
@@ -60,7 +60,7 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class                instance        title               tags mask     isfloating    isterminal   monitor */
+	/* class                instance        title               tags mask     isfloating    isrounded   monitor */
 	{ NULL,                 NULL,			"Google Chrome",	1 << 1,			0,              0,			 -1 },
 	{ TERMCLASS,		    NULL,	        NULL,		        0,		        0,              1,			 -1 },
 	{ "Slack",              NULL,			NULL,		        1 << 8,			0,              0,			 -1 },
@@ -69,6 +69,8 @@ static const Rule rules[] = {
 	{ NULL,		            "spterm",		NULL,		        SPTAG(0),		1,              1,			 -1 },
 	{ NULL,		            "spcalc",	    NULL,		        SPTAG(1),		1,              0,			 -1 },
 	{ "Zathura",		    NULL,	        NULL,		        1 << 2,		    0,              0,			 -1 },
+	{ "Peek",		        NULL,	        NULL,		        0,		        1,              0,			 -1 },
+	{ "matplotlib",		    NULL,	        NULL,		        0,		        1,              0,			 -1 },
 };
 
 /* layout(s) */
@@ -134,8 +136,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return,          spawn,          {.v = termcmd } },
 	{ MODKEY,            			XK_r,	            spawn,          SHCMD("$TERMINAL -e ranger") },
 	{ MODKEY,			            XK_w,	            spawn,	        SHCMD("google-chrome-stable") },
-	{ MODKEY,			            XK_n,	            spawn,	        SHCMD("$TERMINAL -e $EDITOR ~/Documents/notes.txt") },
+	{ MODKEY,			            XK_n,	            spawn,	        SHCMD("$TERMINAL -e $EDITOR ~/Documents/master-thesis/todo-master-thesis.txt") },
 	{ MODKEY,			            XK_b,	            spawn,	        SHCMD("~/.local/bin/setbg ~/Pictures/wallpapers/favorites/") },
+	{ MODKEY,			            XK_BackSpace,	    spawn,	        SHCMD("notify-send \"$(sb-time | sed -r 's/([0-9]{2}:[0-9]{2})/ \\1/')\"") },
 	{ MODKEY|ShiftMask,             XK_b,               togglebar,      {0} },
     { MODKEY|ShiftMask,             XK_r,               quit,           {1} },
 
@@ -222,9 +225,9 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,                  Button4,        sigstatusbar,   {.i = 4} },
 	{ ClkStatusText,        0,                  Button5,        sigstatusbar,   {.i = 5} },
 	{ ClkStatusText,        ShiftMask,          Button1,        sigstatusbar,   {.i = 6} },
-	{ ClkClientWin,         MODKEY,             Button1,        movemouse,      {0} },
+	{ ClkClientWin,         ShiftMask,          Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,             Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY|ShiftMask,   Button1,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,             Button1,        resizemouse,    {0} },
 	{ ClkTagBar,            0,                  Button1,        view,           {0} },
 	{ ClkTagBar,            0,                  Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,             Button1,        tag,            {0} },

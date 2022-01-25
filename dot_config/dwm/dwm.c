@@ -115,7 +115,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, isfloating, isterminal, isurgent, neverfocus, oldstate, isfullscreen;
+	int isfixed, isfloating, isrounded, isurgent, neverfocus, oldstate, isfullscreen;
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -167,7 +167,7 @@ typedef struct {
 	const char *title;
 	unsigned int tags;
 	int isfloating;
-    int isterminal;
+    int isrounded;
 	int monitor;
 } Rule;
 
@@ -366,7 +366,7 @@ applyrules(Client *c)
 		&& (!r->class || strstr(class, r->class))
 		&& (!r->instance || strstr(instance, r->instance)))
 		{
-            c->isterminal = r->isterminal;
+            c->isrounded = r->isrounded;
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
 			if ((r->tags & SPTAGMASK) && r->isfloating) {
@@ -2622,7 +2622,7 @@ roundcorners(Client *c)
     int height = borderpx * 2 + wa.height;
     /* int width = win_attr.border_width * 2 + win_attr.width; */
     /* int height = win_attr.border_width * 2 + win_attr.height; */
-    int rad = cornerrad * enablegaps * c->isterminal * (1-c->isfullscreen); //config_theme_cornerradius;
+    int rad = cornerrad * enablegaps * c->isrounded * (1-c->isfullscreen); //config_theme_cornerradius;
     int dia = 2 * rad;
 
     // do not try to round if the window would be smaller than the corners
