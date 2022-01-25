@@ -8,5 +8,5 @@
 redshift -l 59.3:18.1 -t 5000:3000 &
 xset r rate 300 50 &
 $HOME/.local/bin/setbg $HOME/Pictures/wallpapers/favorites &
-compton &
+compton --config $XDG_CONFIG_HOME/compton/compton.conf &
 dwmblocks &
