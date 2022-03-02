@@ -1,7 +1,18 @@
 #!/bin/sh
 
+# turn off laptop monitor
 xrandr --output eDP1 --off
-xrandr --output DP3 --mode "2560x1440"
+
+# selected connected monitor
+monitor=$(xrandr | grep "\sconnected" | tail -n 1 | cut -d' ' -f1)
+
+# choose maximum resolution
+resolution=$(xrandr | awk "/$monitor/{getline; print}" | tr -s " " | cut -d' ' -f2)
+
+# set configuration
+xrandr --output $monitor --mode "$resolution"
+
+# reload background and conkies
 setbg
 killall conky
 conky --config=$XDG_CONFIG_HOME/conky/conky.conf &

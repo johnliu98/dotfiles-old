@@ -1,5 +1,7 @@
 #!/bin/sh
 
+HEADPHONES="HUAWEI FreeBuds Pro"
+
 bluetoothctl power on
 wait ${!}
 
@@ -11,7 +13,7 @@ wait ${!}
     exit
 
 # connect via bluetooth
-uuid="$(bluetoothctl devices | cut -d' ' -f2)"
+uuid="$(bluetoothctl devices | grep "$HEADPHONES" | cut -d' ' -f2)"
 isconnected="$(bluetoothctl connect $uuid | awk '/Connected/{print $NF}')"
 wait ${!}
 
