@@ -1,27 +1,11 @@
 vim.cmd [[
   augroup _general_settings
     autocmd!
-    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
+    autocmd FileType qf,help,man,lspinfo,spectre_panel nnoremap <silent> <buffer> q :close<CR> 
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200}) 
     autocmd BufWinEnter * :set formatoptions-=cro
     autocmd FileType qf set nobuflisted
-  augroup end
-
-  augroup _text
-    autocmd BufEnter *.txt :set wrap linebreak nolist
-  augroup end
-
-  augroup _latex
-    autocmd BufEnter *.tex :set wrap linebreak nolist
-    autocmd BufWritePost *.tex :!pdflatex %
-  augroup end
-
-  augroup _suckless
-    autocmd BufWritePost config.h :!sudo make install
-  augroup end
-
-  augroup _resrouces
-    autocmd BufWritePost ~/.Xresources :silent !xrdb %
+    autocmd CmdWinEnter * quit
   augroup end
 
   augroup _git
@@ -45,7 +29,21 @@ vim.cmd [[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+
+  augroup _latex
+    autocmd!
+    autocmd FileType tex :set wrap linebreak nolist
+    autocmd BufWritePost *.tex :cd %:h
+    autocmd BufWritePost *.tex :!pdflatex %
+  augroup end
+
+  augroup _xresources
+    autocmd!
+    autocmd BufWritePost ~/.config/X11/xresources :silent !xrdb %
+  augroup end
 ]]
+-- autocmd BufLeave * if (!exists('b:caret')) | let b:caret = winsaveview() | endif
+-- autocmd BufEnter * if (exists('b:caret')) | call winrestview(b:caret) | endif
 
 -- Autoformat
 -- augroup _lsp
